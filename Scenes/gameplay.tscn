@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://0qdt2th35cx5"]
+
+[ext_resource type="Texture2D" uid="uid://dhqk85m8pkqkb" path="res://Assets/icon.svg" id="1_vxgb6"]
+[ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="3_igkb1"]
+[ext_resource type="Script" path="res://Scripts/Balloon.gd" id="4_d0jyi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4w0rr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vxgb6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jcn8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vxgb6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Gameplay" type="Node2D"]
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+position = Vector2(618, 146)
+sprite_frames = SubResource("SpriteFrames_4w0rr")
+script = ExtResource("2_vo60r")
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("3_igkb1")
+
+[node name="Timer" type="Timer" parent="GameManager"]
+
+[node name="Balloon" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jcn8c")
+script = ExtResource("4_d0jyi")
+
+[connection signal="input_Pressed" from="Player" to="GameManager" method="_on_player_input_pressed"]
