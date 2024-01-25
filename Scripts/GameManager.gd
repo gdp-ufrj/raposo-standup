@@ -1,25 +1,56 @@
 extends Node2D
-var list_balloons := []
+var current_balloon : Balloon
+var random = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	create_balloon("Right", 30) # Replace with function body.
-	create_balloon("Left", 30)
-	create_balloon("Up", 30)
-	create_balloon("Down", 30)
-	create_balloon("Right", 30)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	generate_random_balloon()
+
 func _process(delta):
 	pass
-	
-func create_balloon(direction, time_left, opposite_command = false, inverted_queue = false): #Instancia balão
-	var new_balloon = Balloon.new(direction, time_left, opposite_command, inverted_queue)
-	list_balloons.append(new_balloon)
+
+func generate_random_balloon():
+	var direction_queue = []
+	var inverted_queue = false
+	if random_bool(80) : #Decide se vai ser uma sequência com um ou mais elementos
+		direction_queue.append(random_direction())
+	else:	#Múltipla
+		for i in range(3):
+			direction_queue.append(random_direction())
+		inverted_queue = random_bool(25)	#Talvez mudar a porcentagem durante o jogo
+	random.randomize()
+	var time_left = random.randi_range(3, 8)
+	var opposite_command = random_bool(25)	 #Talvez mudar a porcentagem durante o jogo
+	create_balloon(direction_queue, time_left, opposite_command, inverted_queue)
+
+func create_balloon(direction_queue, time_left, opposite_command, inverted_queue):
+	current_balloon = Balloon.new(direction_queue, time_left, self._on_balloon_blew_up, opposite_command, inverted_queue)
+	print(current_balloon.direction_queue)
 
 func _on_player_input_pressed(direction):
-	if list_balloons.size() != 0 :
-		var balloon = list_balloons.pop_front()
-		if balloon.check_direction(direction):
-			print("Acertou")
-		else:
-			print("Errou")
+	if current_balloon :
+		current_balloon.check_direction(direction)
+
+func _on_balloon_blew_up(is_player_hit):
+	if is_player_hit:
+		print("Acertou")
+	else:
+		print("Errou")
+	generate_random_balloon()
+
+func random_direction():
+	random.randomize()
+	var random_number = random.randi_range(0, 3)
+	match random_number:
+		0:
+			return "Up"
+		1:
+			return "Down"
+		2:
+			return "Right"
+		3:
+			return "Left"
+
+func random_bool(percentage:int):
+	random.randomize()
+	return percentage <= random.randi_range(0, 100)

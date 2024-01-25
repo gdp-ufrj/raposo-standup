@@ -1,5 +1,5 @@
 extends AnimatedSprite2D
-signal input_Pressed(direction)
+signal input_pressed(direction)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,10 +9,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("RightEmoji"):
-		input_Pressed.emit("Right")
+		input_pressed.emit("Right")
 	if Input.is_action_just_pressed("LeftEmoji"):
-		input_Pressed.emit("Left")
+		input_pressed.emit("Left")
 	if Input.is_action_just_pressed("UpEmoji"):
-		input_Pressed.emit("Up")
+		input_pressed.emit("Up")
 	if Input.is_action_just_pressed("DownEmoji"):
-		input_Pressed.emit("Down")
+		input_pressed.emit("Down")
