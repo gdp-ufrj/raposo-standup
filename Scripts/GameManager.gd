@@ -11,20 +11,18 @@ func _process(delta):
 
 func generate_random_balloon():
 	var direction_queue = []
-	var inverted_queue = false
 	if random_bool(80) : #Decide se vai ser uma sequência com um ou mais elementos
 		direction_queue.append(random_direction())
 	else:	#Múltipla
 		for i in range(3):
 			direction_queue.append(random_direction())
-		inverted_queue = random_bool(25)	#Talvez mudar a porcentagem durante o jogo
 	random.randomize()
 	var time_left = random.randi_range(3, 8)
 	var opposite_command = random_bool(25)	 #Talvez mudar a porcentagem durante o jogo
-	create_balloon(direction_queue, time_left, opposite_command, inverted_queue)
+	create_balloon(direction_queue, time_left, opposite_command)
 
-func create_balloon(direction_queue, time_left, opposite_command, inverted_queue):
-	current_balloon = Balloon.new(direction_queue, time_left, self._on_balloon_blew_up, opposite_command, inverted_queue)
+func create_balloon(direction_queue, time_left, opposite_command):
+	current_balloon = Balloon.new(direction_queue, time_left, self._on_balloon_blew_up, opposite_command)
 	print(current_balloon.direction_queue)
 
 func _on_player_input_pressed(direction):
@@ -53,4 +51,4 @@ func random_direction():
 
 func random_bool(percentage:int):
 	random.randomize()
-	return percentage <= random.randi_range(0, 100)
+	return random.randi_range(0, 100) <= percentage
