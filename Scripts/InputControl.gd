@@ -9,10 +9,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("RightEmoji"):
-		input_pressed.emit("Right")
+		input_pressed.emit(Enums.Directions.RIGHT)
 	if Input.is_action_just_pressed("LeftEmoji"):
-		input_pressed.emit("Left")
+		input_pressed.emit(Enums.Directions.LEFT)
 	if Input.is_action_just_pressed("UpEmoji"):
-		input_pressed.emit("Up")
+		input_pressed.emit(Enums.Directions.UP)
 	if Input.is_action_just_pressed("DownEmoji"):
-		input_pressed.emit("Down")
+		input_pressed.emit(Enums.Directions.DOWN)
