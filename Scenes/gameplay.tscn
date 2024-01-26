@@ -33,14 +33,21 @@ position = Vector2(618, 146)
 sprite_frames = SubResource("SpriteFrames_4w0rr")
 script = ExtResource("2_vo60r")
 
-[node name="Bubble" type="AnimatedSprite2D" parent="."]
+[node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music")]
 position = Vector2(168, 210)
 sprite_frames = SubResource("SpriteFrames_jcn8c")
 script = ExtResource("4_d0jyi")
+timer = NodePath("Timer")
+music = NodePath("../Music")
 
 [node name="Timer" type="Timer" parent="Bubble"]
-wait_time = 3.0
 autostart = true
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Bubble"]
+current = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+autoplay = true
 
 [connection signal="input_pressed" from="Player" to="Bubble" method="_on_player_input_pressed"]
 [connection signal="timeout" from="Bubble/Timer" to="Bubble" method="_on_timer_timeout"]

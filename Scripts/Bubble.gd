@@ -3,6 +3,11 @@ extends AnimatedSprite2D
 @export var total_emoji : int = 8
 @export var min_emoji : int = 3
 @export var null_prob : int = 50
+@export var beat_time : float = 2
+@export var beat_time_multiplier : float = 1
+@export var beat_time_increment : float = 0.5
+@export var timer : Timer
+@export var music : AudioStreamPlayer2D
 
 var direction_queue : Array
 var queue_index : int
@@ -14,13 +19,15 @@ var random = RandomNumberGenerator.new()
 
 func _ready():
 	random.randomize()
+	beat_time_multiplier -= beat_time_increment
 	generate_bubble()
-	
+	set_music_tempo(beat_time)
 	
 func generate_bubble():
+	increment_beat_tempo()
 	generate_random_sequence()
 	queue_index = 0
-	bubble_active = true
+	bubble_active = false
 	print(direction_queue)
 
 
@@ -55,12 +62,27 @@ func _on_player_input_pressed(direction):
 
 func increment_index():
 	queue_index += 1
-	if queue_index == total_emoji:
-		bubble_active = false
-		generate_bubble()
-	print(queue_index)
 	input_hit = false
+	print(queue_index)
+	
+
+func increment_beat_tempo():
+	beat_time_multiplier += beat_time_increment
+	var new_beat_time = clamp(beat_time/beat_time_multiplier, 0.25, beat_time)
+	set_music_tempo(new_beat_time)
+	
+
+func set_music_tempo(tempo: float):
+	timer.start(tempo)
+	music.pitch_scale = beat_time_multiplier
 
 
 func _on_timer_timeout():
 	increment_index()
+	
+	if queue_index == total_emoji:
+		if !bubble_active:
+			queue_index = 0
+			bubble_active = true
+		else:
+			generate_bubble()
