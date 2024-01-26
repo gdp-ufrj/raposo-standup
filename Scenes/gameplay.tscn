@@ -39,5 +39,8 @@ sprite_frames = SubResource("SpriteFrames_jcn8c")
 script = ExtResource("4_d0jyi")
 
 [node name="Timer" type="Timer" parent="Bubble"]
+wait_time = 3.0
+autostart = true
 
 [connection signal="input_pressed" from="Player" to="Bubble" method="_on_player_input_pressed"]
+[connection signal="timeout" from="Bubble/Timer" to="Bubble" method="_on_timer_timeout"]

@@ -6,6 +6,7 @@ extends AnimatedSprite2D
 
 var direction_queue : Array
 var queue_index : int
+var input_hit : bool
 var time_left
 var opposite_command : bool
 var bubble_active : bool
@@ -13,17 +14,24 @@ var random = RandomNumberGenerator.new()
 
 func _ready():
 	random.randomize()
+	generate_bubble()
+	
+	
+func generate_bubble():
 	generate_random_sequence()
+	queue_index = 0
 	bubble_active = true
 	print(direction_queue)
 
+
 func check_direction(direction):
-	if direction_queue[queue_index] == direction:
-		queue_index += 1
-		if direction_queue.size() == queue_index:
-			blew_up()
+	var current_queue = direction_queue[queue_index]
+	if !input_hit and current_queue == direction:
+		print("Acertou")
 	else:
-		blew_up()
+		print("Errou")
+	input_hit = true
+
 
 func generate_random_sequence():
 	direction_queue = []
@@ -43,9 +51,16 @@ func generate_random_sequence():
 func _on_player_input_pressed(direction):
 	if bubble_active:
 		check_direction(direction)
-		
-func blew_up():
-	pass
 
-func random_bool(percentage:int):
-	return random.randi_range(0, 100) <= percentage
+
+func increment_index():
+	queue_index += 1
+	if queue_index == total_emoji:
+		bubble_active = false
+		generate_bubble()
+	print(queue_index)
+	input_hit = false
+
+
+func _on_timer_timeout():
+	increment_index()
