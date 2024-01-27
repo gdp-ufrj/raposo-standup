@@ -12,8 +12,8 @@ enum Directions{
 }
 
 static func random_direction(null_prob : int = 0, opposite_prob : int = 0):
-	if randi_range(0,100) <= null_prob: return null
-	elif randi_range(0,100) <= opposite_prob : return get_direction()+4
+	if randi_range(0,99) < null_prob: return null
+	if randi_range(0,99) < opposite_prob: return get_direction()+4
 	return get_direction()
 
 static func get_direction():
