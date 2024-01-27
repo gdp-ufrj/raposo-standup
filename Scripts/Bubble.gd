@@ -3,10 +3,10 @@ extends AnimatedSprite2D
 signal score_increased(value)
 signal life_lost()
 
-@export var total_emoji : int = 8
-@export var min_emoji : int = 3
-@export var null_prob : int = 50
-@export var opposite_prob : int = 25
+@export var total_emoji : int = 8 # total number of spots inside a bubble
+@export var min_emoji : int = 3 # minimum number of emojis inside a bubble 
+@export var null_prob : int = 50 # probability of null position
+@export var opposite_prob : int = 25 # probability of opposite emoji
 @export var beat_time : float = 2
 @export var beat_time_multiplier : float = 1
 @export var beat_time_increment : float = 0.5
@@ -17,7 +17,6 @@ var direction_queue : Array
 var queue_index : int
 var input_hit : bool
 var time_left
-var opposite_command : bool
 var bubble_active : bool
 var random = RandomNumberGenerator.new()
 
