@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=8 format=3 uid="uid://0qdt2th35cx5"]
 
 [ext_resource type="Texture2D" uid="uid://dhqk85m8pkqkb" path="res://Assets/icon.svg" id="1_vxgb6"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
+[ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/musica_120BPM.mp3" id="4_4nw44"]
 [ext_resource type="Script" path="res://Scripts/Bubble.gd" id="4_d0jyi"]
+[ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4w0rr"]
 animations = [{
@@ -47,7 +49,12 @@ autostart = true
 current = true
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_4nw44")
 autoplay = true
 
+[node name="GUI" parent="." instance=ExtResource("5_r6kmo")]
+
 [connection signal="input_pressed" from="Player" to="Bubble" method="_on_player_input_pressed"]
+[connection signal="life_lost" from="Bubble" to="GUI" method="_on_bubble_life_lost"]
+[connection signal="score_increased" from="Bubble" to="GUI" method="_on_bubble_score_increased"]
 [connection signal="timeout" from="Bubble/Timer" to="Bubble" method="_on_timer_timeout"]

@@ -1,5 +1,8 @@
 extends AnimatedSprite2D
 
+signal score_increased(value)
+signal life_lost()
+
 @export var total_emoji : int = 8
 @export var min_emoji : int = 3
 @export var null_prob : int = 50
@@ -35,8 +38,10 @@ func check_direction(direction):
 	var current_queue = direction_queue[queue_index]
 	if !input_hit and current_queue == direction:
 		print("Acertou")
+		score_increased.emit(100)
 	else:
 		print("Errou")
+		life_lost.emit()
 	input_hit = true
 
 
@@ -68,8 +73,8 @@ func increment_index():
 
 func increment_beat_tempo():
 	beat_time_multiplier += beat_time_increment
-	var new_beat_time = clamp(beat_time/beat_time_multiplier, 0.25, beat_time)
-	set_music_tempo(new_beat_time)
+	beat_time_multiplier = clamp(beat_time_multiplier, beat_time_multiplier, beat_time*2)
+	set_music_tempo(beat_time/beat_time_multiplier)
 	
 
 func set_music_tempo(tempo: float):
@@ -78,8 +83,13 @@ func set_music_tempo(tempo: float):
 
 
 func _on_timer_timeout():
+	# loses life if timeout occurs and player did not play
+	if bubble_active and (!input_hit and direction_queue[queue_index] != null):
+		life_lost.emit()
+	
 	increment_index()
 	
+	# controls the back and forth of audience and player 
 	if queue_index == total_emoji:
 		if !bubble_active:
 			queue_index = 0
