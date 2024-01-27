@@ -9,6 +9,7 @@ signal life_lost()
 @export var opposite_prob : int = 25 # probability of opposite emoji
 @export var beat_time : float = 2
 @export var beat_time_multiplier : float = 1
+@export var max_beat_time_multiplier : float = 3
 @export var beat_time_increment : float = 0.5
 @export var timer : Timer
 @export var music : AudioStreamPlayer2D
@@ -19,18 +20,20 @@ var input_hit : bool
 var time_left
 var bubble_active : bool
 var random = RandomNumberGenerator.new()
+var new_time : float
 
 func _ready():
+	new_time = beat_time
 	random.randomize()
-	beat_time_multiplier -= beat_time_increment
 	generate_bubble()
-	set_music_tempo(beat_time)
+	current_status()
 	
 func generate_bubble():
-	increment_beat_tempo()
 	generate_random_sequence()
 	queue_index = 0
 	bubble_active = false
+	music.play()
+	set_music_tempo(new_time)
 	print(direction_queue)
 
 
@@ -42,10 +45,10 @@ func check_direction(direction):
 	if current_queue != null: current_queue = current_queue % (Enums.Directions.size()/2)
 	
 	if !input_hit and current_queue == direction:
-		print("Acertou")
+		#print("Acertou")
 		score_increased.emit(100)
 	else:
-		print("Errou")
+		#print("Errou")
 		life_lost.emit()
 	input_hit = true
 
@@ -78,9 +81,9 @@ func increment_index():
 
 func increment_beat_tempo():
 	beat_time_multiplier += beat_time_increment
-	beat_time_multiplier = clamp(beat_time_multiplier, beat_time_multiplier, beat_time*2)
-	set_music_tempo(beat_time/beat_time_multiplier)
-	
+	if beat_time_multiplier > max_beat_time_multiplier:
+		beat_time_multiplier = max_beat_time_multiplier
+	new_time = beat_time/beat_time_multiplier
 
 func set_music_tempo(tempo: float):
 	timer.start(tempo)
@@ -96,8 +99,24 @@ func _on_timer_timeout():
 	
 	# controls the back and forth of audience and player 
 	if queue_index == total_emoji:
+		music.stop()
 		if !bubble_active:
-			queue_index = 0
-			bubble_active = true
+			print('Resposta')
+			start_answer()
 		else:
+			print('Pergunta')
+			increment_beat_tempo()
 			generate_bubble()
+		current_status()
+
+func current_status():
+	print('Pitch: ' + str(music.pitch_scale))
+	print('Timer: ' + str(timer.time_left))
+	print('Beat time: ' + str(new_time))
+	print('0')
+
+func start_answer():
+	queue_index = 0
+	bubble_active = true
+	music.play()
+	set_music_tempo(new_time)
