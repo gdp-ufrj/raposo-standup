@@ -6,6 +6,7 @@ signal life_lost()
 @export var total_emoji : int = 8
 @export var min_emoji : int = 3
 @export var null_prob : int = 50
+@export var opposite_prob : int = 25
 @export var beat_time : float = 2
 @export var beat_time_multiplier : float = 1
 @export var beat_time_increment : float = 0.5
@@ -36,6 +37,11 @@ func generate_bubble():
 
 func check_direction(direction):
 	var current_queue = direction_queue[queue_index]
+	
+	# if current is not null and above 3, 
+	# slides down the expected enum from opposite to normal
+	if current_queue != null: current_queue = current_queue % (Enums.Directions.size()/2)
+	
 	if !input_hit and current_queue == direction:
 		print("Acertou")
 		score_increased.emit(100)
@@ -53,11 +59,11 @@ func generate_random_sequence():
 	while set_emoji < min_emoji:
 		var index : int = randi_range(0, total_emoji - 1)
 		if(direction_queue[index] != null): continue
-		direction_queue[index] = Enums.random_direction()
+		direction_queue[index] = Enums.random_direction(0, opposite_prob)
 		set_emoji += 1
 	for i in range(total_emoji):
 		if(direction_queue[i] != null): continue
-		direction_queue[i] = Enums.random_direction(null_prob)
+		direction_queue[i] = Enums.random_direction(null_prob, opposite_prob)
 
 
 func _on_player_input_pressed(direction):
