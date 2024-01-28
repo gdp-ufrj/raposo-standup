@@ -1,27 +1,207 @@
-[gd_scene load_steps=8 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=38 format=3 uid="uid://0qdt2th35cx5"]
 
-[ext_resource type="Texture2D" uid="uid://dhqk85m8pkqkb" path="res://Assets/icon.svg" id="1_vxgb6"]
+[ext_resource type="Texture2D" uid="uid://btq13nevp1jpf" path="res://Assets/Visual/Player/corpo-Sheet.png" id="1_qckxp"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
+[ext_resource type="Texture2D" uid="uid://dg72wonvxhl7g" path="res://Assets/Visual/Player/expressoes-Sheet.png" id="3_rnfnp"]
+[ext_resource type="Texture2D" uid="uid://crqjhk8bxetsb" path="res://Assets/Visual/HUD/balões/baloes-de-fala-principal.png" id="4_2ni4t"]
 [ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/musica_120BPM.mp3" id="4_4nw44"]
 [ext_resource type="Script" path="res://Scripts/Bubble.gd" id="4_d0jyi"]
 [ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
+[ext_resource type="Texture2D" uid="uid://bqhagscsqbmfo" path="res://Assets/Visual/Background/cenariov2.png" id="6_7yq4q"]
+[ext_resource type="Texture2D" uid="uid://cjcukcrl3a008" path="res://Assets/Visual/HUD/emojis/emojos-mini-Sheet.png" id="6_x1frl"]
+[ext_resource type="Texture2D" uid="uid://b5tlffu2dts4q" path="res://Assets/Visual/HUD/emojis/emojos-mini-inverso-Sheet.png" id="7_5okgi"]
+[ext_resource type="Texture2D" uid="uid://drxfjoid8pypg" path="res://Assets/Visual/Background/plateia.png" id="10_tvaaw"]
+[ext_resource type="Texture2D" uid="uid://dbqu5p18lw3bh" path="res://Assets/Visual/HUD/balões/baloes-de-pensamento-plateia.png" id="11_xrx2p"]
+[ext_resource type="Texture2D" uid="uid://yxsvp5gqj2um" path="res://Assets/Visual/HUD/balões/baloes-de-PENSAMENTO-plateia-distinto.png" id="12_ccl36"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4w0rr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_umpqp"]
+atlas = ExtResource("1_qckxp")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6xtx"]
+atlas = ExtResource("1_qckxp")
+region = Rect2(480, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1adpk"]
+atlas = ExtResource("1_qckxp")
+region = Rect2(960, 0, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h34ev"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_vxgb6")
+"texture": SubResource("AtlasTexture_umpqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6xtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1adpk")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_17vkq"]
+atlas = ExtResource("3_rnfnp")
+region = Rect2(0, 0, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br04h"]
+atlas = ExtResource("3_rnfnp")
+region = Rect2(0, 540, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3xta"]
+atlas = ExtResource("3_rnfnp")
+region = Rect2(0, 810, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jb10"]
+atlas = ExtResource("3_rnfnp")
+region = Rect2(0, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rqdn"]
+atlas = ExtResource("3_rnfnp")
+region = Rect2(480, 270, 480, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t1ld"]
+atlas = ExtResource("3_rnfnp")
+region = Rect2(960, 270, 480, 270)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_apli4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17vkq")
+}],
+"loop": true,
+"name": &"Happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br04h")
+}],
+"loop": true,
+"name": &"Normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3xta")
+}],
+"loop": true,
+"name": &"Sad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jb10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rqdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t1ld")
+}],
+"loop": true,
+"name": &"Talking",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sum7o"]
+atlas = ExtResource("4_2ni4t")
+region = Rect2(0, 0, 480, 270)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_jcn8c"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_vxgb6")
+"texture": SubResource("AtlasTexture_sum7o")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sjyl"]
+atlas = ExtResource("6_x1frl")
+region = Rect2(88, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfcf1"]
+atlas = ExtResource("6_x1frl")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2i8j"]
+atlas = ExtResource("6_x1frl")
+region = Rect2(44, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfnj3"]
+atlas = ExtResource("6_x1frl")
+region = Rect2(66, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62lcw"]
+atlas = ExtResource("6_x1frl")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxeov"]
+atlas = ExtResource("7_5okgi")
+region = Rect2(66, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fky2g"]
+atlas = ExtResource("7_5okgi")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iift1"]
+atlas = ExtResource("7_5okgi")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqd7r"]
+atlas = ExtResource("7_5okgi")
+region = Rect2(44, 0, 22, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sx5t2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sjyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfcf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2i8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfnj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62lcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxeov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fky2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iift1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqd7r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t04yn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_xrx2p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ccl36")
 }],
 "loop": true,
 "name": &"default",
@@ -31,12 +211,18 @@ animations = [{
 [node name="Gameplay" type="Node2D"]
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
-position = Vector2(618, 146)
-sprite_frames = SubResource("SpriteFrames_4w0rr")
+position = Vector2(240, 135)
+sprite_frames = SubResource("SpriteFrames_h34ev")
+frame_progress = 0.098008
 script = ExtResource("2_vo60r")
+metadata/_edit_lock_ = true
+
+[node name="Face" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_apli4")
+animation = &"Normal"
 
 [node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music")]
-position = Vector2(168, 210)
+position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_jcn8c")
 script = ExtResource("4_d0jyi")
 beat_time = 0.25
@@ -44,16 +230,117 @@ max_beat_time_multiplier = 2.0
 beat_time_increment = 0.05
 timer = NodePath("Timer")
 music = NodePath("../Music")
+metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="Bubble"]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Bubble"]
 current = true
 
+[node name="Emojis" type="Node2D" parent="Bubble"]
+
+[node name="Emoji 0" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-177, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 1" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-158, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 2" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-139, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 3" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-120, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 4" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-101, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 5" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-82, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 6" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-63, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 7" type="AnimatedSprite2D" parent="Bubble/Emojis"]
+z_index = 1
+position = Vector2(-44, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_4nw44")
 
 [node name="GUI" parent="." instance=ExtResource("5_r6kmo")]
+
+[node name="BackGround" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(240, 135)
+texture = ExtResource("6_7yq4q")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackGround"]
+z_index = 1
+texture = ExtResource("10_tvaaw")
+
+[node name="Bubble Audience" type="AnimatedSprite2D" parent="."]
+position = Vector2(240, 135)
+sprite_frames = SubResource("SpriteFrames_t04yn")
+metadata/_edit_lock_ = true
+
+[node name="Emojis" type="Node2D" parent="Bubble Audience"]
+position = Vector2(39, 100)
+
+[node name="Emoji 0" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-177, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 1" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-158, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 2" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-139, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 3" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-120, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 4" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-101, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 5" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-82, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 6" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-63, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
+
+[node name="Emoji 7" type="AnimatedSprite2D" parent="Bubble Audience/Emojis"]
+z_index = 1
+position = Vector2(-44, -57)
+sprite_frames = SubResource("SpriteFrames_sx5t2")
 
 [connection signal="input_pressed" from="Player" to="Bubble" method="_on_player_input_pressed"]
 [connection signal="life_lost" from="Bubble" to="GUI" method="_on_bubble_life_lost"]
