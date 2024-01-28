@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/Audio/musica_120BPM.mp3" id="4_4nw44"]
 [ext_resource type="Script" path="res://Scripts/Bubble.gd" id="4_d0jyi"]
 [ext_resource type="Script" path="res://Scripts/Face.gd" id="4_ly0an"]
-[ext_resource type="PackedScene" path="res://Scenes/gui.tscn" id="5_r6kmo"]
+[ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
 [ext_resource type="Texture2D" uid="uid://bqhagscsqbmfo" path="res://Assets/Visual/Background/cenariov2.png" id="6_7yq4q"]
 [ext_resource type="Texture2D" uid="uid://cjcukcrl3a008" path="res://Assets/Visual/HUD/emojis/emojos-mini-Sheet.png" id="6_x1frl"]
 [ext_resource type="Texture2D" uid="uid://b5tlffu2dts4q" path="res://Assets/Visual/HUD/emojis/emojos-mini-inverso-Sheet.png" id="7_5okgi"]
