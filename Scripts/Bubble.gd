@@ -63,7 +63,7 @@ func reset_screen_emojis():
 func _ready():
 	PlayerScore.reset_run_score()
 	select_emoji_sprites()
-	new_time = beat_time
+	new_time = beat_time/beat_time_multiplier
 	random.randomize()
 	generate_bubble()
 	
