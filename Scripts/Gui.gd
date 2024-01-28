@@ -2,9 +2,12 @@ extends CanvasLayer
 
 @export var score : int = 0
 @export var score_value_label : Label
-@export var life : int = 10
+@export var misses : int = 0
+@export var max_misses : int = 40
+@export var misses_bar : TextureProgressBar
 
 func _ready():
+	misses_bar.max_value = max_misses
 	update_label()
 
 
@@ -23,8 +26,9 @@ func _check_diff_score(diff : float):
 	return 0
 
 func _on_bubble_life_lost():
-	life -= 1
-	if life <= 0:
+	misses += 1
+	misses_bar.value = misses
+	if misses >= max_misses:
 		game_over()
 
 
