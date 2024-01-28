@@ -12,10 +12,15 @@ func update_label():
 	score_value_label.text = str(score)
 
 
-func _on_bubble_score_increased(value):
-	score += value
+func _on_bubble_score_increased(diff):
+	score += _check_diff_score(diff)
 	update_label()
 
+func _check_diff_score(diff : float):
+	if diff < 50: return 100
+	if diff < 100: return 50
+	if diff < 200: return 25
+	return 0
 
 func _on_bubble_life_lost():
 	life -= 1
