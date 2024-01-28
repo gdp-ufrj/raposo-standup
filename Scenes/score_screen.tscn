@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://i76vonioqp4y"]
+
+[ext_resource type="Script" path="res://Scripts/score_screen.gd" id="1_gw8fl"]
+[ext_resource type="Texture2D" uid="uid://bpan2lteuo7sl" path="res://Assets/Visual/Background/score-screen.png" id="1_huc3i"]
+[ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="3_7ieg0"]
+
+[sub_resource type="Theme" id="Theme_ay8jc"]
+default_font = ExtResource("3_7ieg0")
+default_font_size = 16
+
+[node name="ScoreScreen" type="Node2D" node_paths=PackedStringArray("final_score_label", "high_score_label")]
+script = ExtResource("1_gw8fl")
+final_score_label = NodePath("Control/FinalScore")
+high_score_label = NodePath("Control/HighScore")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(240, 135)
+texture = ExtResource("1_huc3i")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 270.0
+theme = SubResource("Theme_ay8jc")
+
+[node name="FinalScore" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 76.0
+offset_right = 382.0
+offset_bottom = 106.0
+text = "0000000000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScore" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 187.0
+offset_right = 382.0
+offset_bottom = 233.0
+text = "0000000000"
+horizontal_alignment = 1
+vertical_alignment = 1
