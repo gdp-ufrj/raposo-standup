@@ -18,6 +18,9 @@ signal life_lost()
 @export var inverse_arrow_sprite : Texture2D
 @export var empty_sprite : Texture2D
 
+var audience_emojis := [] #Array de Emojis Plateia
+var player_emojis := []   #Array de Emojis Jogador
+
 var direction_queue : Array
 var queue_index : int
 var input_hit : bool
@@ -29,7 +32,34 @@ var new_time : float
 var last_beat_time : float
 var input_time : float
 
+func select_emoji_sprites():
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 0")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 1")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 2")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 3")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 4")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 5")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 6")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 7")
+	
+	player_emojis.append($"Emojis/Emoji 0")
+	player_emojis.append($"Emojis/Emoji 1")
+	player_emojis.append($"Emojis/Emoji 2")
+	player_emojis.append($"Emojis/Emoji 3")
+	player_emojis.append($"Emojis/Emoji 4")
+	player_emojis.append($"Emojis/Emoji 5")
+	player_emojis.append($"Emojis/Emoji 6")
+	player_emojis.append($"Emojis/Emoji 7")
+
+func reset_screen_emojis():
+	for emoji in audience_emojis:
+		emoji.frame = 0
+	
+	for emoji in player_emojis:
+		emoji.frame = 0
+	
 func _ready():
+	select_emoji_sprites()
 	new_time = beat_time
 	random.randomize()
 	generate_bubble()
@@ -52,6 +82,9 @@ func check_direction(direction):
 	# slides down the expected enum from opposite to normal
 	if current_queue != null: current_queue = current_queue % (Enums.Directions.size()/2)
 	
+	if !input_hit:
+		player_emojis[queue_index].frame = direction + 1
+	
 	if !input_hit and current_queue == direction:
 		#print("Acertou")
 		var diff : float = Time.get_ticks_msec() - last_beat_time
@@ -64,6 +97,7 @@ func check_direction(direction):
 
 
 func generate_random_sequence():
+	reset_screen_emojis()
 	direction_queue = []
 	var set_emoji : int = 0
 	for i in range(total_emoji):
@@ -104,8 +138,14 @@ func _on_timer_timeout():
 	# loses life if timeout occurs and player did not play
 	if bubble_active and (!input_hit and direction_queue[queue_index] != null):
 		life_lost.emit()
-	
+	print(queue_index)
 	increment_index()
+	
+	if !bubble_active and queue_index < total_emoji: #Imprime emojis na tela
+		if direction_queue[queue_index]:
+			audience_emojis[queue_index].frame = direction_queue[queue_index] + 1
+		else:
+			audience_emojis[queue_index].frame = 0
 	
 	# controls the back and forth of audience and player 
 	if queue_index == total_emoji:
