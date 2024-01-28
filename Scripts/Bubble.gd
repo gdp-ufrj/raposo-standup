@@ -191,6 +191,7 @@ func start_answer():
 
 func _on_gui_player_lost():
 	timer.stop()
+	bubble_active = false
 	game_over_panel.visible = true
 	game_over_panel.get_node("AnimationPlayer").play("PopUp")
 	game_over_panel.get_node("TransitionTimer").start()
