@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=53 format=3 uid="uid://0qdt2th35cx5"]
 
 [ext_resource type="Texture2D" uid="uid://btq13nevp1jpf" path="res://Assets/Visual/Player/corpo-Sheet.png" id="1_qckxp"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/Audio/musica_120BPM.mp3" id="4_4nw44"]
 [ext_resource type="Script" path="res://Scripts/Bubble.gd" id="4_d0jyi"]
 [ext_resource type="Script" path="res://Scripts/Face.gd" id="4_ly0an"]
-[ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
+[ext_resource type="PackedScene" path="res://Scenes/gui.tscn" id="5_r6kmo"]
 [ext_resource type="Texture2D" uid="uid://bqhagscsqbmfo" path="res://Assets/Visual/Background/cenariov2.png" id="6_7yq4q"]
 [ext_resource type="Texture2D" uid="uid://cjcukcrl3a008" path="res://Assets/Visual/HUD/emojis/emojos-mini-Sheet.png" id="6_x1frl"]
 [ext_resource type="Texture2D" uid="uid://b5tlffu2dts4q" path="res://Assets/Visual/HUD/emojis/emojos-mini-inverso-Sheet.png" id="7_5okgi"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bde3b85a7dto" path="res://Assets/Visual/HUD/gameover/morte.png" id="19_vryei"]
 [ext_resource type="AudioStream" uid="uid://f0noe4ls6b8d" path="res://Assets/Audio/SFX/vaia.mp3" id="20_74lde"]
 [ext_resource type="AudioStream" uid="uid://drwiel3nurvgc" path="res://Assets/Audio/SFX/cricket.mp3" id="21_cxxpw"]
+[ext_resource type="Script" path="res://Scripts/Tutorial.gd" id="22_yj4up"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umpqp"]
 atlas = ExtResource("1_qckxp")
@@ -292,18 +293,10 @@ script = ExtResource("4_ly0an")
 position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_jcn8c")
 script = ExtResource("4_d0jyi")
-beat_time_multiplier = 0.6
-max_beat_time_multiplier = 1.5
-beat_time_increment = 0.03
-timer = NodePath("Timer")
-music = NodePath("../Music")
+timer = NodePath("../Audios/Timer")
+music = NodePath("../Audios/Music")
 game_over_panel = NodePath("../GameOver")
 metadata/_edit_lock_ = true
-
-[node name="Timer" type="Timer" parent="Bubble"]
-
-[node name="AudioListener2D" type="AudioListener2D" parent="Bubble"]
-current = true
 
 [node name="Emojis" type="Node2D" parent="Bubble"]
 
@@ -346,9 +339,6 @@ sprite_frames = SubResource("SpriteFrames_sx5t2")
 z_index = 1
 position = Vector2(-44, -57)
 sprite_frames = SubResource("SpriteFrames_sx5t2")
-
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_4nw44")
 
 [node name="GUI" parent="." instance=ExtResource("5_r6kmo")]
 
@@ -421,8 +411,15 @@ position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_po63m")
 frame = 1
 
-[node name="Audios" type="Node2D" parent="."]
+[node name="Audios" type="Node2D" parent="." node_paths=PackedStringArray("music", "timer")]
 script = ExtResource("15_eju4f")
+music = NodePath("Music")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Audios"]
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Audios"]
+stream = ExtResource("4_4nw44")
 
 [node name="Clap" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("15_l0t1s")
@@ -454,11 +451,22 @@ libraries = {
 [node name="TransitionTimer" type="Timer" parent="GameOver"]
 wait_time = 2.0
 
+[node name="Tutorial" type="Node" parent="."]
+script = ExtResource("22_yj4up")
+
+[node name="Timer" type="Timer" parent="Tutorial"]
+
 [connection signal="input_pressed" from="Player" to="Bubble" method="_on_player_input_pressed"]
 [connection signal="change_face" from="Bubble" to="Player/Face" method="_on_bubble_change_face"]
+[connection signal="end_sequence_tutorial" from="Bubble" to="Tutorial" method="_on_bubble_end_sequence_tutorial"]
+[connection signal="increment_tempo" from="Bubble" to="Audios" method="_on_bubble_increment_tempo"]
 [connection signal="life_lost" from="Bubble" to="GUI" method="_on_bubble_life_lost"]
 [connection signal="play_audio" from="Bubble" to="Audios" method="_on_bubble_play_audio"]
+[connection signal="play_music" from="Bubble" to="Audios" method="_on_bubble_play_music"]
 [connection signal="score_increased" from="Bubble" to="GUI" method="_on_bubble_score_increased"]
-[connection signal="timeout" from="Bubble/Timer" to="Bubble" method="_on_timer_timeout"]
+[connection signal="stop_music" from="Bubble" to="Audios" method="_on_bubble_stop_music"]
 [connection signal="player_lost" from="GUI" to="Bubble" method="_on_gui_player_lost"]
+[connection signal="timeout" from="Audios/Timer" to="Bubble" method="_on_timer_timeout"]
 [connection signal="timeout" from="GameOver/TransitionTimer" to="Bubble" method="_on_transition_timer_timeout"]
+[connection signal="play_sequence" from="Tutorial" to="Bubble" method="_on_tutorial_play_sequence"]
+[connection signal="start_game" from="Tutorial" to="Bubble" method="_on_tutorial_start_game"]

@@ -4,15 +4,15 @@ signal score_increased(value)
 signal life_lost()
 signal play_audio(name)
 signal change_face(animation)
+signal play_music(has_timer : bool)
+signal stop_music()
+signal end_sequence_tutorial()
+signal increment_tempo()
 
 @export var total_emoji : int = 8 # total number of spots inside a bubble
 @export var min_emoji : int = 3 # minimum number of emojis inside a bubble 
 @export var null_prob : int = 50 # probability of null position
 @export var opposite_prob : int = 25 # probability of opposite emoji
-@export var beat_time : float = 0.25
-@export var beat_time_multiplier : float = 1
-@export var max_beat_time_multiplier : float = 3
-@export var beat_time_increment : float = 0.5
 @export var timer : Timer
 @export var music : AudioStreamPlayer2D
 @export var game_over_panel : Sprite2D
@@ -29,10 +29,17 @@ var hit_success : int
 var time_left
 var bubble_active : bool
 var random = RandomNumberGenerator.new()
-var new_time : float
+var in_tutorial : bool
 
 var last_beat_time : float
 var input_time : float
+
+func _ready():
+	in_tutorial = true
+	PlayerScore.reset_run_score()
+	select_emoji_sprites()
+	random.randomize()
+	generate_bubble()
 
 func select_emoji_sprites():
 	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 0")
@@ -59,23 +66,22 @@ func reset_screen_emojis():
 	
 	for emoji in player_emojis:
 		emoji.frame = 0
-	
-func _ready():
-	PlayerScore.reset_run_score()
-	select_emoji_sprites()
-	new_time = beat_time/beat_time_multiplier
-	random.randomize()
-	generate_bubble()
-	
-func generate_bubble():
-	generate_random_sequence()
+
+
+func generate_bubble(sequence : Array = []):
+	reset_screen_emojis()
+	if sequence.is_empty():
+		generate_random_sequence()
+	else:
+		set_sequence(sequence)
 	queue_index = -1
 	bubble_active = false
 	hit_success = 0
-	music.play()
-	set_music_tempo(new_time)
+	play_music.emit(true)
+	if(direction_queue[0] != null):
+		audience_emojis[0].frame = direction_queue[0] + 1
+		play_audio.emit("Clap")
 	Enums.print_directions(direction_queue)
-	current_status()
 	increment_index()
 
 
@@ -90,19 +96,15 @@ func check_direction(direction):
 		player_emojis[queue_index].frame = direction + 1
 	
 	if !input_hit and current_queue == direction:
-		#print("Acertou")
 		hit_success += 1
 		var diff : float = Time.get_ticks_msec() - last_beat_time
-		print(diff)
 		score_increased.emit(diff)
 	else:
-		#print("Errou")
 		life_lost.emit()
 	input_hit = true
 
 
 func generate_random_sequence():
-	reset_screen_emojis()
 	direction_queue = []
 	var set_emoji : int = 0
 	for i in range(total_emoji):
@@ -116,6 +118,8 @@ func generate_random_sequence():
 		if(direction_queue[i] != null): continue
 		direction_queue[i] = Enums.random_direction(null_prob, opposite_prob)
 
+func set_sequence(sequence : Array):
+	direction_queue = sequence
 
 func _on_player_input_pressed(direction):
 	if bubble_active:
@@ -126,70 +130,56 @@ func increment_index():
 	queue_index += 1
 	input_hit = false
 	last_beat_time = Time.get_ticks_msec()
-	#print(str(queue_index) + " - " + str(last_beat_time))
 
-func increment_beat_tempo():
-	beat_time_multiplier += beat_time_increment
-	if beat_time_multiplier > max_beat_time_multiplier:
-		beat_time_multiplier = max_beat_time_multiplier
-	new_time = beat_time/beat_time_multiplier
-
-func set_music_tempo(tempo: float):
-	timer.start(tempo)
-	music.pitch_scale = beat_time_multiplier
 
 func reset_time_indicator():
 	indicator_path.progress_ratio = 0
 	indicator_path.get_node("Sprite").frame = 0
 
+
 func _on_timer_timeout():
 	# loses life if timeout occurs and player did not play
 	if bubble_active and (!input_hit and direction_queue[queue_index] != null):
 		life_lost.emit()
+		
+	increment_index()
 	
 	if queue_index < total_emoji:
 		if !bubble_active: #Imprime emojis na tela
 			if direction_queue[queue_index] != null:
-				audience_emojis[queue_index].frame = direction_queue[queue_index] + 1
 				play_audio.emit("Clap")
+				audience_emojis[queue_index].frame = direction_queue[queue_index] + 1
 			else:
 				audience_emojis[queue_index].frame = 0
 		else:
 			indicator_path.progress_ratio = indicator_path.progress_ratio + (1.0/7) if queue_index != 7 else 1
 	
-	increment_index()
 	# controls the back and forth of audience and player 
 	if queue_index == total_emoji:
-		music.stop()
+		stop_music.emit()
 		if !bubble_active:
-			print('Resposta')
 			change_face.emit("Talking")
 			reset_time_indicator()
 			start_answer()
 		else:
-			print('Pergunta')
 			get_feedback()
 			indicator_path.get_node("Sprite").frame = 1
-			increment_beat_tempo()
-			generate_bubble()
-
-func current_status():
-	return
-	print('Pitch: ' + str(music.pitch_scale))
-	print('Timer: ' + str(timer.time_left))
-	print('Beat time: ' + str(new_time))
+			if !in_tutorial:
+				increment_tempo.emit()
+				generate_bubble()
+			else:
+				end_sequence_tutorial.emit()
 
 func start_answer():
 	queue_index = -1
 	bubble_active = true
-	music.play()
-	set_music_tempo(new_time)
-	current_status()
+	play_music.emit()
 	increment_index()
 
 
 func _on_gui_player_lost():
 	timer.stop()
+	stop_music.emit()
 	bubble_active = false
 	game_over_panel.visible = true
 	game_over_panel.get_node("AnimationPlayer").play("PopUp")
@@ -212,3 +202,12 @@ func get_feedback():
 	else:
 		change_face.emit("Normal")
 		play_audio.emit("Cricket")
+
+
+func _on_tutorial_start_game():
+	in_tutorial = false
+	generate_bubble()
+
+
+func _on_tutorial_play_sequence(sequence):
+	generate_bubble(sequence)
