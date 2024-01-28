@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal player_lost()
 
+@export var diff_array : Array[int]
 @export var score_label : Label
 @export var misses : int = 0
 @export var max_misses : int = 40
@@ -21,9 +22,9 @@ func _on_bubble_score_increased(diff):
 	update_label()
 
 func _check_diff_score(diff : float):
-	if diff < 50: return 100
-	if diff < 100: return 50
-	if diff < 200: return 25
+	if diff < diff_array[0]: return 100
+	if diff < diff_array[1]: return 50
+	if diff < diff_array[2]: return 25
 	return 0
 
 func _on_bubble_life_lost():

@@ -18,6 +18,7 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("score_label", "misses_bar")]
 script = ExtResource("1_lbuu0")
+diff_array = [100, 250, 500]
 score_label = NodePath("Control/ReferenceRect/MarginContainer/VBoxContainer/ScoreContainer/TextureRect/ScoreValue")
 misses_bar = NodePath("Control/ReferenceRect/MarginContainer/VBoxContainer/LifeContainer/TextureProgressBar")
 
