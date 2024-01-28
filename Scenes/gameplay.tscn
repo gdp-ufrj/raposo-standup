@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=52 format=3 uid="uid://0qdt2th35cx5"]
 
 [ext_resource type="Texture2D" uid="uid://btq13nevp1jpf" path="res://Assets/Visual/Player/corpo-Sheet.png" id="1_qckxp"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://djgl1ub0hf4n" path="res://Assets/Audio/SFX/risadas.mp3" id="19_4aepu"]
 [ext_resource type="Texture2D" uid="uid://bde3b85a7dto" path="res://Assets/Visual/HUD/gameover/morte.png" id="19_vryei"]
 [ext_resource type="AudioStream" uid="uid://f0noe4ls6b8d" path="res://Assets/Audio/SFX/vaia.mp3" id="20_74lde"]
+[ext_resource type="AudioStream" uid="uid://drwiel3nurvgc" path="res://Assets/Audio/SFX/cricket.mp3" id="21_cxxpw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umpqp"]
 atlas = ExtResource("1_qckxp")
@@ -434,6 +435,9 @@ stream = ExtResource("19_4aepu")
 
 [node name="Booing" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("20_74lde")
+
+[node name="Cricket" type="AudioStreamPlayer2D" parent="Audios"]
+stream = ExtResource("21_cxxpw")
 
 [node name="GameOver" type="Sprite2D" parent="."]
 visible = false
