@@ -2,12 +2,14 @@ extends AnimatedSprite2D
 
 signal score_increased(value)
 signal life_lost()
+signal play_audio(name)
+signal change_face(animation)
 
 @export var total_emoji : int = 8 # total number of spots inside a bubble
 @export var min_emoji : int = 3 # minimum number of emojis inside a bubble 
 @export var null_prob : int = 50 # probability of null position
 @export var opposite_prob : int = 25 # probability of opposite emoji
-@export var beat_time : float = 2
+@export var beat_time : float = 0.25
 @export var beat_time_multiplier : float = 1
 @export var max_beat_time_multiplier : float = 3
 @export var beat_time_increment : float = 0.5
@@ -17,6 +19,11 @@ signal life_lost()
 @export var arrow_sprite : Texture2D
 @export var inverse_arrow_sprite : Texture2D
 @export var empty_sprite : Texture2D
+
+var audience_emojis := [] #Array de Emojis Plateia
+var player_emojis := []   #Array de Emojis Jogador
+
+@onready var indicator_path := $"../Time Indicator/PathFollow2D"
 
 var direction_queue : Array
 var queue_index : int
@@ -29,7 +36,34 @@ var new_time : float
 var last_beat_time : float
 var input_time : float
 
+func select_emoji_sprites():
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 0")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 1")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 2")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 3")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 4")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 5")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 6")
+	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 7")
+	
+	player_emojis.append($"Emojis/Emoji 0")
+	player_emojis.append($"Emojis/Emoji 1")
+	player_emojis.append($"Emojis/Emoji 2")
+	player_emojis.append($"Emojis/Emoji 3")
+	player_emojis.append($"Emojis/Emoji 4")
+	player_emojis.append($"Emojis/Emoji 5")
+	player_emojis.append($"Emojis/Emoji 6")
+	player_emojis.append($"Emojis/Emoji 7")
+
+func reset_screen_emojis():
+	for emoji in audience_emojis:
+		emoji.frame = 0
+	
+	for emoji in player_emojis:
+		emoji.frame = 0
+	
 func _ready():
+	select_emoji_sprites()
 	new_time = beat_time
 	random.randomize()
 	generate_bubble()
@@ -52,6 +86,9 @@ func check_direction(direction):
 	# slides down the expected enum from opposite to normal
 	if current_queue != null: current_queue = current_queue % (Enums.Directions.size()/2)
 	
+	if !input_hit:
+		player_emojis[queue_index].frame = direction + 1
+	
 	if !input_hit and current_queue == direction:
 		#print("Acertou")
 		var diff : float = Time.get_ticks_msec() - last_beat_time
@@ -64,6 +101,7 @@ func check_direction(direction):
 
 
 func generate_random_sequence():
+	reset_screen_emojis()
 	direction_queue = []
 	var set_emoji : int = 0
 	for i in range(total_emoji):
@@ -99,22 +137,38 @@ func set_music_tempo(tempo: float):
 	timer.start(tempo)
 	music.pitch_scale = beat_time_multiplier
 
+func reset_time_indicator():
+	indicator_path.progress_ratio = 0
+	indicator_path.get_node("Sprite").frame = 0
 
 func _on_timer_timeout():
 	# loses life if timeout occurs and player did not play
 	if bubble_active and (!input_hit and direction_queue[queue_index] != null):
 		life_lost.emit()
 	
-	increment_index()
+	if queue_index < total_emoji:
+		if !bubble_active: #Imprime emojis na tela
+			if direction_queue[queue_index] != null:
+				audience_emojis[queue_index].frame = direction_queue[queue_index] + 1
+				play_audio.emit("Clap")
+			else:
+				audience_emojis[queue_index].frame = 0
+		else:
+			indicator_path.progress_ratio = indicator_path.progress_ratio + (1.0/7) if queue_index != 7 else 1
 	
+	increment_index()
 	# controls the back and forth of audience and player 
 	if queue_index == total_emoji:
 		music.stop()
 		if !bubble_active:
 			print('Resposta')
+			change_face.emit("Talking")
+			reset_time_indicator()
 			start_answer()
 		else:
 			print('Pergunta')
+			change_face.emit("Happy")
+			indicator_path.get_node("Sprite").frame = 1
 			increment_beat_tempo()
 			generate_bubble()
 
