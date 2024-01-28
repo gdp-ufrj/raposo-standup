@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuv3fax2qw7x1"]
+[gd_scene load_steps=3 format=3 uid="uid://cuv3fax2qw7x1"]
 
 [ext_resource type="Script" path="res://Scripts/Gui.gd" id="1_lbuu0"]
+[ext_resource type="Texture2D" uid="uid://dmocqb1cmgwto" path="res://Assets/Visual/HUD/emojis/roda-de-input1.png" id="2_ctaes"]
 
 [node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("score_value_label")]
 script = ExtResource("1_lbuu0")
@@ -35,3 +36,7 @@ text = "Score:"
 layout_mode = 2
 size_flags_horizontal = 8
 text = "00000000"
+
+[node name="InputWheel" type="TextureRect" parent="Control/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_ctaes")
