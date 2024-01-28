@@ -25,6 +25,7 @@ var player_emojis := []   #Array de Emojis Jogador
 var direction_queue : Array
 var queue_index : int
 var input_hit : bool
+var hit_success : int
 var time_left
 var bubble_active : bool
 var random = RandomNumberGenerator.new()
@@ -70,6 +71,7 @@ func generate_bubble():
 	generate_random_sequence()
 	queue_index = -1
 	bubble_active = false
+	hit_success = 0
 	music.play()
 	set_music_tempo(new_time)
 	Enums.print_directions(direction_queue)
@@ -89,6 +91,7 @@ func check_direction(direction):
 	
 	if !input_hit and current_queue == direction:
 		#print("Acertou")
+		hit_success += 1
 		var diff : float = Time.get_ticks_msec() - last_beat_time
 		print(diff)
 		score_increased.emit(diff)
@@ -165,6 +168,7 @@ func _on_timer_timeout():
 			start_answer()
 		else:
 			print('Pergunta')
+			get_feedback()
 			change_face.emit("Happy")
 			indicator_path.get_node("Sprite").frame = 1
 			increment_beat_tempo()
@@ -196,3 +200,12 @@ func _on_gui_player_lost():
 func _on_transition_timer_timeout():
 	game_over_panel.visible = false
 	get_tree().change_scene_to_file("res://Scenes/score_screen.tscn")
+
+
+func get_feedback():
+	if hit_success >= 5:
+		play_audio.emit("Laughter")
+	elif hit_success <= 2:
+		play_audio.emit("Booing")
+	else:
+		pass
