@@ -142,6 +142,9 @@ func _on_timer_timeout():
 	if bubble_active and (!input_hit and direction_queue[queue_index] != null):
 		life_lost.emit()
 		
+	if bubble_active and !input_hit and direction_queue[queue_index] == null:
+		hit_success += 1
+		
 	increment_index()
 	
 	if queue_index < total_emoji:
