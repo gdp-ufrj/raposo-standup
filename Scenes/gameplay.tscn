@@ -1,13 +1,11 @@
 [gd_scene load_steps=38 format=3 uid="uid://0qdt2th35cx5"]
 
-
 [ext_resource type="Texture2D" uid="uid://btq13nevp1jpf" path="res://Assets/Visual/Player/corpo-Sheet.png" id="1_qckxp"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
 [ext_resource type="Texture2D" uid="uid://dg72wonvxhl7g" path="res://Assets/Visual/Player/expressoes-Sheet.png" id="3_rnfnp"]
 [ext_resource type="Texture2D" uid="uid://crqjhk8bxetsb" path="res://Assets/Visual/HUD/balões/baloes-de-fala-principal.png" id="4_2ni4t"]
 [ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/musica_120BPM.mp3" id="4_4nw44"]
 [ext_resource type="Script" path="res://Scripts/Bubble.gd" id="4_d0jyi"]
-[ext_resource type="Texture2D" uid="uid://djodvrt8uar8x" path="res://Assets/Debug/arrow2.png" id="5_epk17"]
 [ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
 [ext_resource type="Texture2D" uid="uid://bqhagscsqbmfo" path="res://Assets/Visual/Background/cenariov2.png" id="6_7yq4q"]
 [ext_resource type="Texture2D" uid="uid://cjcukcrl3a008" path="res://Assets/Visual/HUD/emojis/emojos-mini-Sheet.png" id="6_x1frl"]
@@ -223,7 +221,6 @@ metadata/_edit_lock_ = true
 sprite_frames = SubResource("SpriteFrames_apli4")
 animation = &"Normal"
 
-
 [node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music")]
 position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_jcn8c")
@@ -281,7 +278,6 @@ sprite_frames = SubResource("SpriteFrames_sx5t2")
 z_index = 1
 position = Vector2(-44, -57)
 sprite_frames = SubResource("SpriteFrames_sx5t2")
-
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_4nw44")

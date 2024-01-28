@@ -41,7 +41,6 @@ func generate_bubble():
 	music.play()
 	set_music_tempo(new_time)
 	Enums.print_directions(direction_queue)
-	show_emoji_screen()
 	current_status()
 	increment_index()
 
@@ -132,25 +131,4 @@ func start_answer():
 	set_music_tempo(new_time)
 	current_status()
 	increment_index()
-
-func show_emoji_screen():
-	for i in range(total_emoji):
-		var direction = direction_queue[i]
-		if direction == null:
-			emoji_squares[i].texture = empty_sprite
-			emoji_squares[i].rotation_degrees = 0
-			continue
-		if direction < 4:
-			emoji_squares[i].texture = arrow_sprite
-		else:
-			emoji_squares[i].texture = inverse_arrow_sprite
-		match direction % 4:
-			Enums.Directions.UP:
-				emoji_squares[i].rotation_degrees = -90
-			Enums.Directions.RIGHT:
-				emoji_squares[i].rotation_degrees = 0
-			Enums.Directions.DOWN:
-				emoji_squares[i].rotation_degrees = 90
-			Enums.Directions.LEFT:
-				emoji_squares[i].rotation_degrees = 180
-			
+	
