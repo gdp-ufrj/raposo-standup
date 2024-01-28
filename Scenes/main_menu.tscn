@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg0i5lpgilsgc"]
+[gd_scene load_steps=11 format=3 uid="uid://bg0i5lpgilsgc"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_0kcde"]
+[ext_resource type="Texture2D" uid="uid://o48oq20hb6t4" path="res://Assets/Visual/Background/telaprincipal.png" id="2_3k2od"]
+[ext_resource type="Texture2D" uid="uid://n0x1n05d4ctg" path="res://Assets/Visual/HUD/menu/start1.png" id="3_7kj2j"]
+[ext_resource type="Texture2D" uid="uid://c7s3bh04r2vdm" path="res://Assets/Visual/HUD/menu/start2.png" id="4_glwpk"]
+[ext_resource type="Texture2D" uid="uid://sismwr4finb1" path="res://Assets/Visual/HUD/menu/options1.png" id="5_03po1"]
+[ext_resource type="Texture2D" uid="uid://dtd10ujr11gy7" path="res://Assets/Visual/HUD/menu/options2.png" id="6_h5dmg"]
+[ext_resource type="Texture2D" uid="uid://ctupu73sl44c6" path="res://Assets/Visual/HUD/menu/credits1.png" id="7_15pcg"]
+[ext_resource type="Texture2D" uid="uid://b5mk2i8airtro" path="res://Assets/Visual/HUD/menu/credits2.png" id="8_b7c5r"]
+[ext_resource type="Texture2D" uid="uid://1k46y8o6nmap" path="res://Assets/Visual/HUD/menu/PORTA1.png" id="8_n6cf3"]
+[ext_resource type="Texture2D" uid="uid://d307weetey0pf" path="res://Assets/Visual/HUD/menu/PORTA2.png" id="9_o8gxj"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -18,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_3k2od")
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -26,25 +36,36 @@ anchor_left = 0.025
 anchor_top = 0.95
 anchor_right = 0.025
 anchor_bottom = 0.95
-offset_top = -136.0
-offset_right = 160.0
+offset_left = 36.0
+offset_top = -110.0
+offset_right = 196.0
+offset_bottom = 26.0
 grow_vertical = 0
 
-[node name="StartButton" type="Button" parent="ButtonsContainer"]
+[node name="StartButton" type="TextureButton" parent="ButtonsContainer"]
 layout_mode = 2
-text = "Start"
+texture_normal = ExtResource("3_7kj2j")
+texture_pressed = ExtResource("4_glwpk")
+texture_hover = ExtResource("4_glwpk")
 
-[node name="OptionsButton" type="Button" parent="ButtonsContainer"]
+[node name="OptionsButton" type="TextureButton" parent="ButtonsContainer"]
+visible = false
 layout_mode = 2
-text = "Options"
+texture_normal = ExtResource("5_03po1")
+texture_pressed = ExtResource("6_h5dmg")
+texture_hover = ExtResource("6_h5dmg")
 
-[node name="CreditsButton" type="Button" parent="ButtonsContainer"]
+[node name="CreditsButton" type="TextureButton" parent="ButtonsContainer"]
 layout_mode = 2
-text = "Credits"
+texture_normal = ExtResource("7_15pcg")
+texture_pressed = ExtResource("8_b7c5r")
+texture_hover = ExtResource("8_b7c5r")
 
-[node name="QuitButton" type="Button" parent="ButtonsContainer"]
+[node name="QuitButton" type="TextureButton" parent="ButtonsContainer"]
 layout_mode = 2
-text = "Quit"
+texture_normal = ExtResource("8_n6cf3")
+texture_pressed = ExtResource("9_o8gxj")
+texture_hover = ExtResource("9_o8gxj")
 
 [connection signal="pressed" from="ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="ButtonsContainer/OptionsButton" to="." method="_on_options_button_pressed"]
