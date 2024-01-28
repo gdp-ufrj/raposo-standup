@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal player_lost()
+
 @export var score : int = 0
 @export var score_label : Label
 @export var misses : int = 0
@@ -33,4 +35,4 @@ func _on_bubble_life_lost():
 
 
 func game_over():
-	print("Perdeu") 
+	player_lost.emit()

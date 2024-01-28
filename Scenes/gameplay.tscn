@@ -1,12 +1,12 @@
-[gd_scene load_steps=44 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=49 format=3 uid="uid://0qdt2th35cx5"]
 
 [ext_resource type="Texture2D" uid="uid://btq13nevp1jpf" path="res://Assets/Visual/Player/corpo-Sheet.png" id="1_qckxp"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
 [ext_resource type="Texture2D" uid="uid://dg72wonvxhl7g" path="res://Assets/Visual/Player/expressoes-Sheet.png" id="3_rnfnp"]
 [ext_resource type="Texture2D" uid="uid://crqjhk8bxetsb" path="res://Assets/Visual/HUD/balões/baloes-de-fala-principal.png" id="4_2ni4t"]
-[ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/musica_120BPM.mp3" id="4_4nw44"]
+[ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/Audio/musica_120BPM.mp3" id="4_4nw44"]
 [ext_resource type="Script" path="res://Scripts/Bubble.gd" id="4_d0jyi"]
-[ext_resource type="Script" path="res://Scenes/Face.gd" id="4_ly0an"]
+[ext_resource type="Script" path="res://Scripts/Face.gd" id="4_ly0an"]
 [ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
 [ext_resource type="Texture2D" uid="uid://bqhagscsqbmfo" path="res://Assets/Visual/Background/cenariov2.png" id="6_7yq4q"]
 [ext_resource type="Texture2D" uid="uid://cjcukcrl3a008" path="res://Assets/Visual/HUD/emojis/emojos-mini-Sheet.png" id="6_x1frl"]
@@ -15,8 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dbqu5p18lw3bh" path="res://Assets/Visual/HUD/balões/baloes-de-pensamento-plateia.png" id="11_xrx2p"]
 [ext_resource type="Texture2D" uid="uid://yxsvp5gqj2um" path="res://Assets/Visual/HUD/balões/baloes-de-PENSAMENTO-plateia-distinto.png" id="12_ccl36"]
 [ext_resource type="Texture2D" uid="uid://y8i6qtdlv2ai" path="res://Assets/Visual/HUD/emojis/compasso-raposo.png" id="14_mpnjq"]
-[ext_resource type="Script" path="res://Scenes/Audios.gd" id="15_eju4f"]
+[ext_resource type="Script" path="res://Scripts/Audios.gd" id="15_eju4f"]
 [ext_resource type="AudioStream" uid="uid://bf8pvtkj1wlhp" path="res://Assets/Audio/SFX/palma.mp3" id="15_l0t1s"]
+[ext_resource type="AudioStream" uid="uid://dsqw75w31a6yp" path="res://Assets/Audio/SFX/explosao_generica.mp3" id="18_233go"]
+[ext_resource type="Texture2D" uid="uid://bde3b85a7dto" path="res://Assets/Visual/HUD/gameover/morte.png" id="19_vryei"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umpqp"]
 atlas = ExtResource("1_qckxp")
@@ -232,6 +234,43 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_xpejb"]
+resource_name = "PopUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iqqpb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7krr6"]
+_data = {
+"PopUp": SubResource("Animation_xpejb"),
+"RESET": SubResource("Animation_iqqpb")
+}
+
 [node name="Gameplay" type="Node2D"]
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
@@ -246,7 +285,7 @@ sprite_frames = SubResource("SpriteFrames_apli4")
 animation = &"Happy"
 script = ExtResource("4_ly0an")
 
-[node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music")]
+[node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music", "game_over_panel")]
 position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_jcn8c")
 script = ExtResource("4_d0jyi")
@@ -254,6 +293,7 @@ max_beat_time_multiplier = 2.0
 beat_time_increment = 0.05
 timer = NodePath("Timer")
 music = NodePath("../Music")
+game_over_panel = NodePath("../GameOver")
 metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="Bubble"]
@@ -383,9 +423,29 @@ script = ExtResource("15_eju4f")
 [node name="Clap" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("15_l0t1s")
 
+[node name="Explosion" type="AudioStreamPlayer2D" parent="Audios"]
+stream = ExtResource("18_233go")
+
+[node name="GameOver" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(240, 136)
+rotation = 6.28319
+texture = ExtResource("19_vryei")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_7krr6")
+}
+
+[node name="TransitionTimer" type="Timer" parent="GameOver"]
+wait_time = 2.0
+
 [connection signal="input_pressed" from="Player" to="Bubble" method="_on_player_input_pressed"]
 [connection signal="change_face" from="Bubble" to="Player/Face" method="_on_bubble_change_face"]
 [connection signal="life_lost" from="Bubble" to="GUI" method="_on_bubble_life_lost"]
 [connection signal="play_audio" from="Bubble" to="Audios" method="_on_bubble_play_audio"]
 [connection signal="score_increased" from="Bubble" to="GUI" method="_on_bubble_score_increased"]
 [connection signal="timeout" from="Bubble/Timer" to="Bubble" method="_on_timer_timeout"]
+[connection signal="player_lost" from="GUI" to="Bubble" method="_on_gui_player_lost"]
+[connection signal="timeout" from="GameOver/TransitionTimer" to="Bubble" method="_on_transition_timer_timeout"]

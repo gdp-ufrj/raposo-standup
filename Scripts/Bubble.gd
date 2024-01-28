@@ -15,10 +15,7 @@ signal change_face(animation)
 @export var beat_time_increment : float = 0.5
 @export var timer : Timer
 @export var music : AudioStreamPlayer2D
-@export var emoji_squares : Array[Sprite2D]
-@export var arrow_sprite : Texture2D
-@export var inverse_arrow_sprite : Texture2D
-@export var empty_sprite : Texture2D
+@export var game_over_panel : Sprite2D
 
 var audience_emojis := [] #Array de Emojis Plateia
 var player_emojis := []   #Array de Emojis Jogador
@@ -185,4 +182,16 @@ func start_answer():
 	set_music_tempo(new_time)
 	current_status()
 	increment_index()
-	
+
+
+func _on_gui_player_lost():
+	timer.stop()
+	game_over_panel.visible = true
+	game_over_panel.get_node("AnimationPlayer").play("PopUp")
+	game_over_panel.get_node("TransitionTimer").start()
+	play_audio.emit("Explosion")
+
+
+func _on_transition_timer_timeout():
+	game_over_panel.visible = false
+	get_tree().change_scene_to_file("res://Scenes/score_screen.tscn")

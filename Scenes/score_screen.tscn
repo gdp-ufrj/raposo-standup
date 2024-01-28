@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://i76vonioqp4y"]
+
+[ext_resource type="Script" path="res://Scripts/score_screen.gd" id="1_gw8fl"]
+[ext_resource type="Texture2D" uid="uid://bpan2lteuo7sl" path="res://Assets/Visual/Background/score-screen.png" id="1_huc3i"]
+
+[node name="ScoreScreen" type="Node2D"]
+script = ExtResource("1_gw8fl")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(240, 135)
+texture = ExtResource("1_huc3i")
