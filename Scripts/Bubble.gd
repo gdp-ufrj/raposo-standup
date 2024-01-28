@@ -60,6 +60,7 @@ func reset_screen_emojis():
 		emoji.frame = 0
 	
 func _ready():
+	PlayerScore.reset_run_score()
 	select_emoji_sprites()
 	new_time = beat_time
 	random.randomize()
