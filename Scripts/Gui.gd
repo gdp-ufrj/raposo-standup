@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export var score : int = 0
-@export var score_value_label : Label
+@export var score_label : Label
 @export var misses : int = 0
 @export var max_misses : int = 40
 @export var misses_bar : TextureProgressBar
@@ -12,7 +12,7 @@ func _ready():
 
 
 func update_label():
-	score_value_label.text = str(score)
+	score_label.text = str(score)
 
 
 func _on_bubble_score_increased(diff):
