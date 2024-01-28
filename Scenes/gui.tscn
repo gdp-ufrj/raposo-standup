@@ -1,11 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuv3fax2qw7x1"]
+[gd_scene load_steps=10 format=3 uid="uid://cuv3fax2qw7x1"]
 
 [ext_resource type="Script" path="res://Scripts/Gui.gd" id="1_lbuu0"]
+[ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="2_av3g8"]
 [ext_resource type="Texture2D" uid="uid://dmocqb1cmgwto" path="res://Assets/Visual/HUD/emojis/roda-de-input1.png" id="2_ctaes"]
+[ext_resource type="Texture2D" uid="uid://dph7aukf55k82" path="res://Assets/Visual/HUD/vacilômetro/vacilometro-tomate.png" id="2_hmkxe"]
+[ext_resource type="Texture2D" uid="uid://c6mywrjgmqbwq" path="res://Assets/Visual/HUD/score/SCORE.png" id="3_c237f"]
+[ext_resource type="Texture2D" uid="uid://bdd8yolvx7k5r" path="res://Assets/Visual/HUD/vacilômetro/vacilometro-over.png" id="3_oqnsn"]
+[ext_resource type="Texture2D" uid="uid://bcut13e5fd8ds" path="res://Assets/Visual/HUD/vacilômetro/vacilometro-progress.png" id="4_i2e8h"]
 
-[node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("score_value_label")]
+[sub_resource type="Theme" id="Theme_yntkg"]
+default_font = ExtResource("2_av3g8")
+default_font_size = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_6cn80"]
+font_size = 5
+font_color = Color(0, 0, 0, 1)
+
+[node name="GUI" type="CanvasLayer" node_paths=PackedStringArray("score_label", "misses_bar")]
 script = ExtResource("1_lbuu0")
-score_value_label = NodePath("Control/MarginContainer/HBoxContainer/ScoreValue")
+score_label = NodePath("Control/ReferenceRect/MarginContainer/VBoxContainer/ScoreContainer/TextureRect/ScoreValue")
+misses_bar = NodePath("Control/ReferenceRect/MarginContainer/VBoxContainer/LifeContainer/TextureProgressBar")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -14,8 +28,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_yntkg")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
+[node name="ReferenceRect" type="ReferenceRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,20 +38,59 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/ReferenceRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -90.0
+offset_bottom = 90.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ReferenceRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ScoreContainer" type="HBoxContainer" parent="Control/ReferenceRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 2
 
-[node name="ScoreText" type="Label" parent="Control/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Control/ReferenceRect/MarginContainer/VBoxContainer/ScoreContainer"]
 layout_mode = 2
-text = "Score:"
+texture = ExtResource("3_c237f")
 
-[node name="ScoreValue" type="Label" parent="Control/MarginContainer/HBoxContainer"]
+[node name="ScoreValue" type="Label" parent="Control/ReferenceRect/MarginContainer/VBoxContainer/ScoreContainer/TextureRect"]
 layout_mode = 2
+offset_left = 10.0
+offset_top = 14.0
+offset_right = 60.0
+offset_bottom = 28.0
 size_flags_horizontal = 8
-text = "00000000"
+text = "0000000000"
+label_settings = SubResource("LabelSettings_6cn80")
+horizontal_alignment = 2
 
-[node name="InputWheel" type="TextureRect" parent="Control/MarginContainer"]
+[node name="LifeContainer" type="HBoxContainer" parent="Control/ReferenceRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/ReferenceRect/MarginContainer/VBoxContainer/LifeContainer"]
+layout_mode = 2
+texture = ExtResource("2_hmkxe")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/ReferenceRect/MarginContainer/VBoxContainer/LifeContainer"]
+layout_mode = 2
+max_value = 10.0
+fill_mode = 3
+texture_under = ExtResource("3_oqnsn")
+texture_progress = ExtResource("4_i2e8h")
+
+[node name="InputWheel" type="TextureRect" parent="Control/ReferenceRect"]
+layout_mode = 2
+offset_right = 480.0
+offset_bottom = 270.0
 texture = ExtResource("2_ctaes")
