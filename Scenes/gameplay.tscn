@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=10 format=3 uid="uid://0qdt2th35cx5"]
 
 [ext_resource type="Texture2D" uid="uid://dhqk85m8pkqkb" path="res://Assets/icon.svg" id="1_vxgb6"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
+[ext_resource type="Texture2D" uid="uid://burfbiljskd2j" path="res://Assets/Debug/arrow.png" id="4_1k55w"]
 [ext_resource type="AudioStream" uid="uid://cs38vh3s8atsh" path="res://Assets/musica_120BPM.mp3" id="4_4nw44"]
 [ext_resource type="Script" path="res://Scripts/Bubble.gd" id="4_d0jyi"]
+[ext_resource type="Texture2D" uid="uid://djodvrt8uar8x" path="res://Assets/Debug/arrow2.png" id="5_epk17"]
 [ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4w0rr"]
@@ -31,11 +33,13 @@ animations = [{
 [node name="Gameplay" type="Node2D"]
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(618, 146)
 sprite_frames = SubResource("SpriteFrames_4w0rr")
 script = ExtResource("2_vo60r")
 
-[node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music")]
+[node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music", "emoji_squares")]
+visible = false
 position = Vector2(168, 210)
 sprite_frames = SubResource("SpriteFrames_jcn8c")
 script = ExtResource("4_d0jyi")
@@ -44,11 +48,49 @@ max_beat_time_multiplier = 2.0
 beat_time_increment = 0.05
 timer = NodePath("Timer")
 music = NodePath("../Music")
+emoji_squares = [NodePath("Emojis/Sprite2D"), NodePath("Emojis/Sprite2D2"), NodePath("Emojis/Sprite2D3"), NodePath("Emojis/Sprite2D4"), NodePath("Emojis/Sprite2D5"), NodePath("Emojis/Sprite2D6"), NodePath("Emojis/Sprite2D7"), NodePath("Emojis/Sprite2D8")]
+arrow_sprite = ExtResource("4_1k55w")
+inverse_arrow_sprite = ExtResource("5_epk17")
+empty_sprite = ExtResource("1_vxgb6")
 
 [node name="Timer" type="Timer" parent="Bubble"]
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Bubble"]
 current = true
+
+[node name="Emojis" type="Node" parent="Bubble"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(70, 580)
+texture = ExtResource("1_vxgb6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(199, 580)
+texture = ExtResource("1_vxgb6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(325, 583)
+texture = ExtResource("1_vxgb6")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(452, 584)
+texture = ExtResource("1_vxgb6")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(580, 583)
+texture = ExtResource("1_vxgb6")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(708, 582)
+texture = ExtResource("1_vxgb6")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(840, 583)
+texture = ExtResource("1_vxgb6")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Bubble/Emojis"]
+position = Vector2(972, 582)
+texture = ExtResource("1_vxgb6")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_4nw44")

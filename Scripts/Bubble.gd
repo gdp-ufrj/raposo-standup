@@ -13,6 +13,10 @@ signal life_lost()
 @export var beat_time_increment : float = 0.5
 @export var timer : Timer
 @export var music : AudioStreamPlayer2D
+@export var emoji_squares : Array[Sprite2D]
+@export var arrow_sprite : Texture2D
+@export var inverse_arrow_sprite : Texture2D
+@export var empty_sprite : Texture2D
 
 var direction_queue : Array
 var queue_index : int
@@ -22,19 +26,24 @@ var bubble_active : bool
 var random = RandomNumberGenerator.new()
 var new_time : float
 
+var last_beat_time : float
+var input_time : float
+
 func _ready():
 	new_time = beat_time
 	random.randomize()
 	generate_bubble()
-	current_status()
 	
 func generate_bubble():
 	generate_random_sequence()
-	queue_index = 0
+	queue_index = -1
 	bubble_active = false
 	music.play()
 	set_music_tempo(new_time)
-	print(direction_queue)
+	Enums.print_directions(direction_queue)
+	show_emoji_screen()
+	current_status()
+	increment_index()
 
 
 func check_direction(direction):
@@ -46,7 +55,9 @@ func check_direction(direction):
 	
 	if !input_hit and current_queue == direction:
 		#print("Acertou")
-		score_increased.emit(100)
+		var diff : float = Time.get_ticks_msec() - last_beat_time
+		print(diff)
+		score_increased.emit(diff)
 	else:
 		#print("Errou")
 		life_lost.emit()
@@ -76,8 +87,8 @@ func _on_player_input_pressed(direction):
 func increment_index():
 	queue_index += 1
 	input_hit = false
-	print(queue_index)
-	
+	last_beat_time = Time.get_ticks_msec()
+	#print(str(queue_index) + " - " + str(last_beat_time))
 
 func increment_beat_tempo():
 	beat_time_multiplier += beat_time_increment
@@ -107,16 +118,39 @@ func _on_timer_timeout():
 			print('Pergunta')
 			increment_beat_tempo()
 			generate_bubble()
-		current_status()
 
 func current_status():
+	return
 	print('Pitch: ' + str(music.pitch_scale))
 	print('Timer: ' + str(timer.time_left))
 	print('Beat time: ' + str(new_time))
-	print('0')
 
 func start_answer():
-	queue_index = 0
+	queue_index = -1
 	bubble_active = true
 	music.play()
 	set_music_tempo(new_time)
+	current_status()
+	increment_index()
+
+func show_emoji_screen():
+	for i in range(total_emoji):
+		var direction = direction_queue[i]
+		if direction == null:
+			emoji_squares[i].texture = empty_sprite
+			emoji_squares[i].rotation_degrees = 0
+			continue
+		if direction < 4:
+			emoji_squares[i].texture = arrow_sprite
+		else:
+			emoji_squares[i].texture = inverse_arrow_sprite
+		match direction % 4:
+			Enums.Directions.UP:
+				emoji_squares[i].rotation_degrees = -90
+			Enums.Directions.RIGHT:
+				emoji_squares[i].rotation_degrees = 0
+			Enums.Directions.DOWN:
+				emoji_squares[i].rotation_degrees = 90
+			Enums.Directions.LEFT:
+				emoji_squares[i].rotation_degrees = 180
+			
