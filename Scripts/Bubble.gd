@@ -169,7 +169,6 @@ func _on_timer_timeout():
 		else:
 			print('Pergunta')
 			get_feedback()
-			change_face.emit("Happy")
 			indicator_path.get_node("Sprite").frame = 1
 			increment_beat_tempo()
 			generate_bubble()
@@ -204,8 +203,11 @@ func _on_transition_timer_timeout():
 
 func get_feedback():
 	if hit_success >= 5:
+		change_face.emit("Happy")
 		play_audio.emit("Laughter")
 	elif hit_success <= 2:
+		change_face.emit("Sad")
 		play_audio.emit("Booing")
 	else:
-		pass
+		change_face.emit("Normal")
+		play_audio.emit("Cricket")
