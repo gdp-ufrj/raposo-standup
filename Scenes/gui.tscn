@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/Gui.gd" id="1_lbuu0"]
 [ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="2_av3g8"]
-[ext_resource type="Texture2D" uid="uid://dmocqb1cmgwto" path="res://Assets/Visual/HUD/emojis/roda-de-input1.png" id="2_ctaes"]
-[ext_resource type="Texture2D" uid="uid://dph7aukf55k82" path="res://Assets/Visual/HUD/vacilômetro/vacilometro-tomate.png" id="2_hmkxe"]
-[ext_resource type="Texture2D" uid="uid://c6mywrjgmqbwq" path="res://Assets/Visual/HUD/score/SCORE.png" id="3_c237f"]
-[ext_resource type="Texture2D" uid="uid://bdd8yolvx7k5r" path="res://Assets/Visual/HUD/vacilômetro/vacilometro-over.png" id="3_oqnsn"]
-[ext_resource type="Texture2D" uid="uid://bcut13e5fd8ds" path="res://Assets/Visual/HUD/vacilômetro/vacilometro-progress.png" id="4_i2e8h"]
+[ext_resource type="Texture2D" uid="uid://dmocqb1cmgwto" path="res://Assets/Visual/HUD/Emojis/roda-de-input1.png" id="2_ctaes"]
+[ext_resource type="Texture2D" uid="uid://dph7aukf55k82" path="res://Assets/Visual/HUD/Vacilômetro/vacilometro-tomate.png" id="2_hmkxe"]
+[ext_resource type="Texture2D" uid="uid://c6mywrjgmqbwq" path="res://Assets/Visual/HUD/Score/SCORE.png" id="3_c237f"]
+[ext_resource type="Texture2D" uid="uid://bdd8yolvx7k5r" path="res://Assets/Visual/HUD/Vacilômetro/vacilometro-over.png" id="3_oqnsn"]
+[ext_resource type="Texture2D" uid="uid://bcut13e5fd8ds" path="res://Assets/Visual/HUD/Vacilômetro/vacilometro-progress.png" id="4_i2e8h"]
 
 [sub_resource type="Theme" id="Theme_yntkg"]
 default_font = ExtResource("2_av3g8")

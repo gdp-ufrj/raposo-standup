@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5mk2i8airtro"
-path="res://.godot/imported/credits2.png-38016a0f71a648d75e564c74be4df01c.ctex"
+uid="uid://o48oq20hb6t4"
+path="res://.godot/imported/telaprincipal.png-e857c5b259fde8decf923995dd49ad57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/menu/credits2.png"
-dest_files=["res://.godot/imported/credits2.png-38016a0f71a648d75e564c74be4df01c.ctex"]
+source_file="res://Assets/Visual/Background/Main Menu/telaprincipal.png"
+dest_files=["res://.godot/imported/telaprincipal.png-e857c5b259fde8decf923995dd49ad57.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtd10ujr11gy7"
-path="res://.godot/imported/options2.png-358e7f3a20749ac015d6cf54fc7ce185.ctex"
+uid="uid://bqhagscsqbmfo"
+path="res://.godot/imported/cenariov2.png-20828411e080233106368b68d7b8ad14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/menu/options2.png"
-dest_files=["res://.godot/imported/options2.png-358e7f3a20749ac015d6cf54fc7ce185.ctex"]
+source_file="res://Assets/Visual/Background/Gameplay/cenariov2.png"
+dest_files=["res://.godot/imported/cenariov2.png-20828411e080233106368b68d7b8ad14.ctex"]
 
 [params]
 

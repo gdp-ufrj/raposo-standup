@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d307weetey0pf"
-path="res://.godot/imported/PORTA2.png-d3b3e3d92c6078de92ec9e37a0a75ac1.ctex"
+uid="uid://dbqu5p18lw3bh"
+path="res://.godot/imported/baloes-de-pensamento-plateia.png-fb9bb71fffd7068757f61956021b6919.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/menu/PORTA2.png"
-dest_files=["res://.godot/imported/PORTA2.png-d3b3e3d92c6078de92ec9e37a0a75ac1.ctex"]
+source_file="res://Assets/Visual/HUD/Bubbles/baloes-de-pensamento-plateia.png"
+dest_files=["res://.godot/imported/baloes-de-pensamento-plateia.png-fb9bb71fffd7068757f61956021b6919.ctex"]
 
 [params]
 

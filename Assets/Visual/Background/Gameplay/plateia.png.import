@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n0x1n05d4ctg"
-path="res://.godot/imported/start1.png-abab9e0be9d1e4e28cfaf5fd7d0dedaa.ctex"
+uid="uid://drxfjoid8pypg"
+path="res://.godot/imported/plateia.png-08ce0ad9b3ffb40cdf1f24a336130727.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/menu/start1.png"
-dest_files=["res://.godot/imported/start1.png-abab9e0be9d1e4e28cfaf5fd7d0dedaa.ctex"]
+source_file="res://Assets/Visual/Background/Gameplay/plateia.png"
+dest_files=["res://.godot/imported/plateia.png-08ce0ad9b3ffb40cdf1f24a336130727.ctex"]
 
 [params]
 

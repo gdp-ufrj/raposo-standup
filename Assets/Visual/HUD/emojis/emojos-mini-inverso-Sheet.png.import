@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5tlffu2dts4q"
-path="res://.godot/imported/emojos-mini-inverso-Sheet.png-1a1dbbe84f2c89ca96c786a746f9cfde.ctex"
+path="res://.godot/imported/emojos-mini-inverso-Sheet.png-f2172a03c50f14c0de7ea944c4330a69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/emojis/emojos-mini-inverso-Sheet.png"
-dest_files=["res://.godot/imported/emojos-mini-inverso-Sheet.png-1a1dbbe84f2c89ca96c786a746f9cfde.ctex"]
+source_file="res://Assets/Visual/HUD/Emojis/emojos-mini-inverso-Sheet.png"
+dest_files=["res://.godot/imported/emojos-mini-inverso-Sheet.png-f2172a03c50f14c0de7ea944c4330a69.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o48oq20hb6t4"
-path="res://.godot/imported/telaprincipal.png-d3845e475ad013ab75e9d10bee0a9b61.ctex"
+uid="uid://d307weetey0pf"
+path="res://.godot/imported/PORTA2.png-c6dfc1d439f216d619c33a69db626177.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/Background/telaprincipal.png"
-dest_files=["res://.godot/imported/telaprincipal.png-d3845e475ad013ab75e9d10bee0a9b61.ctex"]
+source_file="res://Assets/Visual/HUD/Main Menu/PORTA2.png"
+dest_files=["res://.godot/imported/PORTA2.png-c6dfc1d439f216d619c33a69db626177.ctex"]
 
 [params]
 

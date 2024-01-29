@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3lq6yw00f8ho"
-path="res://.godot/imported/RAPOSO3.png-8956f55b976342494c2d28f4b94911b5.ctex"
+path="res://.godot/imported/RAPOSO3.png-4e4de75f720194b7466d431acf1d2751.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/Background/RAPOSO3.png"
-dest_files=["res://.godot/imported/RAPOSO3.png-8956f55b976342494c2d28f4b94911b5.ctex"]
+source_file="res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png"
+dest_files=["res://.godot/imported/RAPOSO3.png-4e4de75f720194b7466d431acf1d2751.ctex"]
 
 [params]
 

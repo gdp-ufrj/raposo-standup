@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1k46y8o6nmap"
-path="res://.godot/imported/PORTA1.png-1cf02e7975b93e172dab36306e33f88e.ctex"
+uid="uid://ctupu73sl44c6"
+path="res://.godot/imported/credits1.png-a858772cdb634068ec9fc4002659fd1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/menu/PORTA1.png"
-dest_files=["res://.godot/imported/PORTA1.png-1cf02e7975b93e172dab36306e33f88e.ctex"]
+source_file="res://Assets/Visual/HUD/Main Menu/credits1.png"
+dest_files=["res://.godot/imported/credits1.png-a858772cdb634068ec9fc4002659fd1c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yxsvp5gqj2um"
-path="res://.godot/imported/baloes-de-PENSAMENTO-plateia-distinto.png-dfa4cd0013cf744c4519c47ef64d3651.ctex"
+uid="uid://crqjhk8bxetsb"
+path="res://.godot/imported/baloes-de-fala-principal.png-b420e3b265ad5f9d904454d2933024eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/balões/baloes-de-PENSAMENTO-plateia-distinto.png"
-dest_files=["res://.godot/imported/baloes-de-PENSAMENTO-plateia-distinto.png-dfa4cd0013cf744c4519c47ef64d3651.ctex"]
+source_file="res://Assets/Visual/HUD/Bubbles/baloes-de-fala-principal.png"
+dest_files=["res://.godot/imported/baloes-de-fala-principal.png-b420e3b265ad5f9d904454d2933024eb.ctex"]
 
 [params]
 

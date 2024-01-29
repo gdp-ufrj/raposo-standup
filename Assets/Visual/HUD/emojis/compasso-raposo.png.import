@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://y8i6qtdlv2ai"
-path="res://.godot/imported/compasso-raposo.png-e61209aa39395f7868eb00cf4404a697.ctex"
+path="res://.godot/imported/compasso-raposo.png-437d42b06a700a69de70cf5e79f2e711.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/emojis/compasso-raposo.png"
-dest_files=["res://.godot/imported/compasso-raposo.png-e61209aa39395f7868eb00cf4404a697.ctex"]
+source_file="res://Assets/Visual/HUD/Emojis/compasso-raposo.png"
+dest_files=["res://.godot/imported/compasso-raposo.png-437d42b06a700a69de70cf5e79f2e711.ctex"]
 
 [params]
 

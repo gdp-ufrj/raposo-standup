@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crqjhk8bxetsb"
-path="res://.godot/imported/baloes-de-fala-principal.png-667c9202f13d8628b67acf747da8e4dc.ctex"
+uid="uid://b5mk2i8airtro"
+path="res://.godot/imported/credits2.png-601c499cb7325fce172b8e8fc0ec97d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/balões/baloes-de-fala-principal.png"
-dest_files=["res://.godot/imported/baloes-de-fala-principal.png-667c9202f13d8628b67acf747da8e4dc.ctex"]
+source_file="res://Assets/Visual/HUD/Main Menu/credits2.png"
+dest_files=["res://.godot/imported/credits2.png-601c499cb7325fce172b8e8fc0ec97d5.ctex"]
 
 [params]
 
