@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh20agngplluy"]
+
+[ext_resource type="Texture2D" uid="uid://o48oq20hb6t4" path="res://Assets/Visual/Background/Main Menu/telaprincipal.png" id="1_kpde8"]
+[ext_resource type="Script" path="res://Scripts/OptionsMenu.gd" id="1_t8lyi"]
+[ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="2_hlf0r"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t8lyi")
+
+[node name="BackGround" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_kpde8")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 115.0
+offset_right = 98.0
+offset_bottom = 155.0
+
+[node name="Resolution" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hlf0r")
+theme_override_font_sizes/font_size = 14
+text = "Resolution"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Resolution"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hlf0r")
+keep_pressed_outside = true
+alignment = 2
