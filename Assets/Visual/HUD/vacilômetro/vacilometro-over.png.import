@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdd8yolvx7k5r"
-path="res://.godot/imported/vacilometro-over.png-5b6cef97d57080aedb12f0ab8c5eaa37.ctex"
+path="res://.godot/imported/vacilometro-over.png-4257a56a1a87659560758b60ad927d85.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/Vacilômetro/vacilometro-over.png"
-dest_files=["res://.godot/imported/vacilometro-over.png-5b6cef97d57080aedb12f0ab8c5eaa37.ctex"]
+source_file="res://Assets/Visual/HUD/vacilômetro/vacilometro-over.png"
+dest_files=["res://.godot/imported/vacilometro-over.png-4257a56a1a87659560758b60ad927d85.ctex"]
 
 [params]
 

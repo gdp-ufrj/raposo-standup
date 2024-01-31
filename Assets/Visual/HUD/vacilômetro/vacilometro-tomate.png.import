@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dph7aukf55k82"
-path="res://.godot/imported/vacilometro-tomate.png-5bbc87d8f6d5b91797aa89d7b50bc26d.ctex"
+path="res://.godot/imported/vacilometro-tomate.png-3a7dea340a956fb4bc2e0889fe7c7e76.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/Vacilômetro/vacilometro-tomate.png"
-dest_files=["res://.godot/imported/vacilometro-tomate.png-5bbc87d8f6d5b91797aa89d7b50bc26d.ctex"]
+source_file="res://Assets/Visual/HUD/vacilômetro/vacilometro-tomate.png"
+dest_files=["res://.godot/imported/vacilometro-tomate.png-3a7dea340a956fb4bc2e0889fe7c7e76.ctex"]
 
 [params]
 

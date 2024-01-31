@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmocqb1cmgwto"
-path="res://.godot/imported/roda-de-input1.png-7dc1500b69a83873f6fa8c7a8090f75c.ctex"
+path="res://.godot/imported/roda-de-input1.png-36e610c1febdaa1d910edf1c195228e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/Emojis/roda-de-input1.png"
-dest_files=["res://.godot/imported/roda-de-input1.png-7dc1500b69a83873f6fa8c7a8090f75c.ctex"]
+source_file="res://Assets/Visual/HUD/emojis/roda-de-input1.png"
+dest_files=["res://.godot/imported/roda-de-input1.png-36e610c1febdaa1d910edf1c195228e4.ctex"]
 
 [params]
 
