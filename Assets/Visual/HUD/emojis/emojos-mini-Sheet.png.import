@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjcukcrl3a008"
-path="res://.godot/imported/emojos-mini-Sheet.png-acd11eb32b12ac7d4f1dbe8710b7dd49.ctex"
+path="res://.godot/imported/emojos-mini-Sheet.png-4c6179c2c8bf42b23d0b550b028b699c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Visual/HUD/Emojis/emojos-mini-Sheet.png"
-dest_files=["res://.godot/imported/emojos-mini-Sheet.png-acd11eb32b12ac7d4f1dbe8710b7dd49.ctex"]
+source_file="res://Assets/Visual/HUD/emojis/emojos-mini-Sheet.png"
+dest_files=["res://.godot/imported/emojos-mini-Sheet.png-4c6179c2c8bf42b23d0b550b028b699c.ctex"]
 
 [params]
 
