@@ -1,6 +1,7 @@
 extends Control
 
 @onready var resolution_button = $VBoxContainer/Resolution/OptionButton as OptionButton
+@onready var back_menu = $Button as Button
 
 const RESOLUTION_DICTIONARY : Dictionary = {
 	"480 x 270" : Vector2i(480, 270),
@@ -18,9 +19,9 @@ func add_resolution_items():
 
 func on_resolution_selected(index : int) -> void:
 	var window_size = RESOLUTION_DICTIONARY.values()[index]
-	var screen_size = DisplayServer.screen_get_size()  #pega o tamanho do monitor onde está a janela do jogo
-	var screen_position = DisplayServer.screen_get_position()
-	#var screen_center = Vector2(screen_size.x / 2 - window_size.x / 2, screen_size.y / 2 - window_size.y / 2)
-	var screen_center = Vector2(0, 0)	
 	DisplayServer.window_set_size(window_size)
-	#DisplayServer.window_set_position(screen_center)
+	get_window().move_to_center()
+
+
+func _on_button_pressed():
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

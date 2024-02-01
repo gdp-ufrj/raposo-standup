@@ -420,21 +420,27 @@ timer = NodePath("Timer")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("4_4nw44")
+bus = &"Music"
 
 [node name="Clap" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("15_l0t1s")
+bus = &"SFX"
 
 [node name="Explosion" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("18_233go")
+bus = &"SFX"
 
 [node name="Laughter" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("19_4aepu")
+bus = &"SFX"
 
 [node name="Booing" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("20_74lde")
+bus = &"SFX"
 
 [node name="Cricket" type="AudioStreamPlayer2D" parent="Audios"]
 stream = ExtResource("21_cxxpw")
+bus = &"SFX"
 
 [node name="GameOver" type="Sprite2D" parent="."]
 visible = false
