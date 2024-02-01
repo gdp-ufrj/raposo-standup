@@ -24,3 +24,4 @@ func set_slider_value():
 
 func on_value_changed(value : float):
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+	SettingsData.on_volume_changed(bus_name, value)

@@ -1,7 +1,7 @@
 extends Control
 
 @onready var resolution_button = $VBoxContainer/Resolution/OptionButton as OptionButton
-@onready var back_menu = $Button as Button
+@onready var resolution_container = $VBoxContainer/Resolution
 
 const RESOLUTION_DICTIONARY : Dictionary = {
 	"480 x 270" : Vector2i(480, 270),
@@ -10,8 +10,15 @@ const RESOLUTION_DICTIONARY : Dictionary = {
 }
 
 func _ready():
-	add_resolution_items()
-	resolution_button.item_selected.connect(on_resolution_selected)
+	if OS.get_name() == "Web":
+		resolution_container.hide()
+	else:
+		resolution_button.item_selected.connect(on_resolution_selected)
+		add_resolution_items()
+		var window_size = get_window().size
+		for i in range(RESOLUTION_DICTIONARY.values().size()):
+			if RESOLUTION_DICTIONARY.values()[i] == window_size:
+				resolution_button.selected = i
 
 func add_resolution_items():
 	for resolution_option in RESOLUTION_DICTIONARY:
@@ -21,7 +28,9 @@ func on_resolution_selected(index : int) -> void:
 	var window_size = RESOLUTION_DICTIONARY.values()[index]
 	DisplayServer.window_set_size(window_size)
 	get_window().move_to_center()
+	SettingsData.on_resolution_changed(window_size)
 
 
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	SettingsData.save_data()

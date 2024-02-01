@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 PlayerScore="*res://Scripts/PlayerScore.gd"
+SettingsData="*res://Scripts/SettingsData.gd"
 
 [display]
 
