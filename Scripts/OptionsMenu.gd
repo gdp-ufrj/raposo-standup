@@ -2,6 +2,7 @@ extends Control
 
 @onready var resolution_button = $VBoxContainer/Resolution/OptionButton as OptionButton
 @onready var resolution_container = $VBoxContainer/Resolution
+@onready var back_button = $Button
 
 const RESOLUTION_DICTIONARY : Dictionary = {
 	"480 x 270" : Vector2i(480, 270),
@@ -12,6 +13,7 @@ const RESOLUTION_DICTIONARY : Dictionary = {
 func _ready():
 	if OS.get_name() == "Web":
 		resolution_container.hide()
+		back_button.grab_focus()
 	else:
 		resolution_button.item_selected.connect(on_resolution_selected)
 		add_resolution_items()
@@ -19,6 +21,7 @@ func _ready():
 		for i in range(RESOLUTION_DICTIONARY.values().size()):
 			if RESOLUTION_DICTIONARY.values()[i] == window_size:
 				resolution_button.selected = i
+		resolution_button.grab_focus()
 
 func add_resolution_items():
 	for resolution_option in RESOLUTION_DICTIONARY:
