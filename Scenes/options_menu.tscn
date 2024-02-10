@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh20agngplluy"]
+[gd_scene load_steps=5 format=3 uid="uid://bl4jwcyg8oair"]
 
 [ext_resource type="Texture2D" uid="uid://o48oq20hb6t4" path="res://Assets/Visual/Background/Main Menu/telaprincipal.png" id="1_kpde8"]
 [ext_resource type="Script" path="res://Scripts/OptionsMenu.gd" id="1_t8lyi"]
 [ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="2_hlf0r"]
-[ext_resource type="PackedScene" uid="uid://cllsuq7qaw3j1" path="res://Scenes/volume_change.tscn" id="4_11weh"]
+[ext_resource type="PackedScene" path="res://Scenes/volume_change.tscn" id="4_11weh"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -53,6 +53,8 @@ bus_name = "Music"
 
 [node name="SFX Volume" parent="VBoxContainer" instance=ExtResource("4_11weh")]
 layout_mode = 2
+focus_neighbor_right = NodePath("../../Button")
+focus_neighbor_bottom = NodePath("../../Button")
 bus_name = "SFX"
 
 [node name="Button" type="Button" parent="."]
