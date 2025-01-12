@@ -8,6 +8,7 @@ signal play_music(has_timer : bool)
 signal stop_music()
 signal end_sequence_tutorial()
 signal increment_tempo()
+signal toggle_player_input()
 
 @export var total_emoji : int = 8 # total number of spots inside a bubble
 @export var min_emoji : int = 3 # minimum number of emojis inside a bubble 
@@ -23,13 +24,15 @@ var player_emojis := []   #Array de Emojis Jogador
 @onready var indicator_path := $"../Time Indicator/PathFollow2D"
 
 var direction_queue : Array
-var queue_index : int
+var current_beat : int
 var input_hit : bool
 var hit_success : int
 var time_left
 var bubble_active : bool
 var random = RandomNumberGenerator.new()
 var in_tutorial : bool
+var current_tempo : float
+var starting_time : float
 
 var last_beat_time : float
 var input_time : float
@@ -74,7 +77,7 @@ func generate_bubble(sequence : Array = []):
 		generate_random_sequence()
 	else:
 		set_sequence(sequence)
-	queue_index = -1
+	current_beat = -1
 	bubble_active = false
 	hit_success = 0
 	play_music.emit(true)
@@ -86,23 +89,28 @@ func generate_bubble(sequence : Array = []):
 
 
 func check_direction(direction):
-	var current_queue = direction_queue[queue_index]
+	var current_index : int = floor((current_beat + 1) / 2)
+	var current_queue = direction_queue[current_index]
 	
 	# if current is not null and above 3, 
 	# slides down the expected enum from opposite to normal
 	if current_queue != null: current_queue = current_queue % (Enums.Directions.size()/2)
 	
 	if !input_hit:
-		player_emojis[queue_index].frame = direction + 1
+		player_emojis[current_index].frame = direction + 1
 	
 	if !input_hit and current_queue == direction:
 		hit_success += 1
-		var diff : float = Time.get_ticks_msec() - last_beat_time
+		var diff : float = calculate_score(Time.get_ticks_msec())
 		score_increased.emit(diff)
 	else:
 		life_lost.emit()
+		
 	input_hit = true
 
+func calculate_score(beat_time : float) -> float:
+	var current_index : int = floor((current_beat + 1) / 2)
+	return absf(beat_time - starting_time + current_tempo * current_index)
 
 func generate_random_sequence():
 	direction_queue = []
@@ -127,9 +135,9 @@ func _on_player_input_pressed(direction):
 
 
 func increment_index():
-	queue_index += 1
-	input_hit = false
-	last_beat_time = Time.get_ticks_msec()
+	current_beat += 1
+	if current_beat % 2 != 0:
+		input_hit = false
 
 
 func reset_time_indicator():
@@ -137,45 +145,54 @@ func reset_time_indicator():
 	indicator_path.get_node("Sprite").frame = 0
 
 
+func end_queue():
+	toggle_player_input.emit()
+	stop_music.emit()
+	if !bubble_active:
+		change_face.emit("Talking")
+		reset_time_indicator()
+		start_answer()
+	else:
+		get_feedback()
+		indicator_path.get_node("Sprite").frame = 1
+		if !in_tutorial:
+			increment_tempo.emit()
+			generate_bubble()
+		else:
+			end_sequence_tutorial.emit()
+
 func _on_timer_timeout():
-	# loses life if timeout occurs and player did not play
-	if bubble_active and (!input_hit and direction_queue[queue_index] != null):
-		life_lost.emit()
-		
-	if bubble_active and !input_hit and direction_queue[queue_index] == null:
-		hit_success += 1
+	print("Finished beat " + str(current_beat))
+	if current_beat == total_emoji * 2 - 1:
+		end_queue()
+		return
+	
+	var current_index : int = floor((current_beat + 1) / 2)
+	
+	# If going music and half beat and hasnt played
+	if bubble_active and current_beat % 2 != 0 and !input_hit:
+		# Check if there was a note
+		if direction_queue[current_index] != null:
+			life_lost.emit()
+		else:
+			hit_success += 1
 		
 	increment_index()
 	
-	if queue_index < total_emoji:
+	if current_index < total_emoji and current_beat % 2 == 0:
 		if !bubble_active: #Imprime emojis na tela
-			if direction_queue[queue_index] != null:
+			if direction_queue[current_index] != null:
 				play_audio.emit("Clap")
-				audience_emojis[queue_index].frame = direction_queue[queue_index] + 1
+				audience_emojis[current_index].frame = direction_queue[current_index] + 1
 			else:
-				audience_emojis[queue_index].frame = 0
+				audience_emojis[current_index].frame = 0
 		else:
-			indicator_path.progress_ratio = indicator_path.progress_ratio + (1.0/7) if queue_index != 7 else 1
-	
-	# controls the back and forth of audience and player 
-	if queue_index == total_emoji:
-		stop_music.emit()
-		if !bubble_active:
-			change_face.emit("Talking")
-			reset_time_indicator()
-			start_answer()
-		else:
-			get_feedback()
-			indicator_path.get_node("Sprite").frame = 1
-			if !in_tutorial:
-				increment_tempo.emit()
-				generate_bubble()
-			else:
-				end_sequence_tutorial.emit()
+			indicator_path.progress_ratio = indicator_path.progress_ratio + (1.0/7) if current_index != 7 else 1
 
 func start_answer():
-	queue_index = -1
+	current_beat = -1
 	bubble_active = true
+	starting_time = Time.get_ticks_msec()
 	play_music.emit()
 	increment_index()
 
@@ -214,3 +231,7 @@ func _on_tutorial_start_game():
 
 func _on_tutorial_play_sequence(sequence):
 	generate_bubble(sequence)
+
+
+func _on_audios_current_music_tempo(current_tempo: float) -> void:
+	self.current_tempo = current_tempo

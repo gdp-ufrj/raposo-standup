@@ -7,6 +7,8 @@ extends Node2D
 @export var max_beat_time_multiplier : float = 1.5
 @export var beat_time_increment : float = 0.03
 
+signal current_music_tempo(current_tempo : float)
+
 func _on_bubble_play_audio(name):
 	var audio = self.get_node(name)
 	if audio:
@@ -17,7 +19,7 @@ func _on_bubble_play_music(has_timer : bool = false):
 	music.pitch_scale = beat_time_multiplier
 	music.play()
 	if has_timer:
-		timer.start(beat_time / beat_time_multiplier)
+		timer.start(beat_time / beat_time_multiplier / 2.0)
 
 
 func _on_bubble_stop_music():
