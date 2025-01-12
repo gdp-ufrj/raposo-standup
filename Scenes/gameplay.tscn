@@ -1,6 +1,7 @@
-[gd_scene load_steps=53 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=55 format=3 uid="uid://0qdt2th35cx5"]
 
 [ext_resource type="Texture2D" uid="uid://btq13nevp1jpf" path="res://Assets/Visual/Player/corpo-Sheet.png" id="1_qckxp"]
+[ext_resource type="Script" path="res://Scripts/gameplay.gd" id="1_ypioa"]
 [ext_resource type="Script" path="res://Scripts/InputControl.gd" id="2_vo60r"]
 [ext_resource type="Texture2D" uid="uid://dg72wonvxhl7g" path="res://Assets/Visual/Player/expressoes-Sheet.png" id="3_rnfnp"]
 [ext_resource type="Texture2D" uid="uid://crqjhk8bxetsb" path="res://Assets/Visual/HUD/Bubbles/baloes-de-fala-principal.png" id="4_2ni4t"]
@@ -9,20 +10,21 @@
 [ext_resource type="Script" path="res://Scripts/Face.gd" id="4_ly0an"]
 [ext_resource type="PackedScene" uid="uid://cuv3fax2qw7x1" path="res://Scenes/gui.tscn" id="5_r6kmo"]
 [ext_resource type="Texture2D" uid="uid://bqhagscsqbmfo" path="res://Assets/Visual/Background/Gameplay/cenariov2.png" id="6_7yq4q"]
-[ext_resource type="Texture2D" uid="uid://cjcukcrl3a008" path="res://Assets/Visual/HUD/Emojis/emojos-mini-Sheet.png" id="6_x1frl"]
-[ext_resource type="Texture2D" uid="uid://b5tlffu2dts4q" path="res://Assets/Visual/HUD/Emojis/emojos-mini-inverso-Sheet.png" id="7_5okgi"]
+[ext_resource type="Texture2D" uid="uid://cjcukcrl3a008" path="res://Assets/Visual/HUD/emojis/emojos-mini-Sheet.png" id="6_x1frl"]
+[ext_resource type="Texture2D" uid="uid://b5tlffu2dts4q" path="res://Assets/Visual/HUD/emojis/emojos-mini-inverso-Sheet.png" id="7_5okgi"]
 [ext_resource type="Texture2D" uid="uid://drxfjoid8pypg" path="res://Assets/Visual/Background/Gameplay/plateia.png" id="10_tvaaw"]
 [ext_resource type="Texture2D" uid="uid://dbqu5p18lw3bh" path="res://Assets/Visual/HUD/Bubbles/baloes-de-pensamento-plateia.png" id="11_xrx2p"]
 [ext_resource type="Texture2D" uid="uid://yxsvp5gqj2um" path="res://Assets/Visual/HUD/Bubbles/baloes-de-PENSAMENTO-plateia-distinto.png" id="12_ccl36"]
-[ext_resource type="Texture2D" uid="uid://y8i6qtdlv2ai" path="res://Assets/Visual/HUD/Emojis/compasso-raposo.png" id="14_mpnjq"]
+[ext_resource type="Texture2D" uid="uid://y8i6qtdlv2ai" path="res://Assets/Visual/HUD/emojis/compasso-raposo.png" id="14_mpnjq"]
 [ext_resource type="Script" path="res://Scripts/Audios.gd" id="15_eju4f"]
 [ext_resource type="AudioStream" uid="uid://bf8pvtkj1wlhp" path="res://Assets/Audio/SFX/palma.mp3" id="15_l0t1s"]
 [ext_resource type="AudioStream" uid="uid://dsqw75w31a6yp" path="res://Assets/Audio/SFX/explosao_generica.mp3" id="18_233go"]
 [ext_resource type="AudioStream" uid="uid://djgl1ub0hf4n" path="res://Assets/Audio/SFX/risadas.mp3" id="19_4aepu"]
-[ext_resource type="Texture2D" uid="uid://bde3b85a7dto" path="res://Assets/Visual/HUD/Gameover/morte.png" id="19_vryei"]
+[ext_resource type="Texture2D" uid="uid://bde3b85a7dto" path="res://Assets/Visual/HUD/gameover/morte.png" id="19_vryei"]
 [ext_resource type="AudioStream" uid="uid://f0noe4ls6b8d" path="res://Assets/Audio/SFX/vaia.mp3" id="20_74lde"]
 [ext_resource type="AudioStream" uid="uid://drwiel3nurvgc" path="res://Assets/Audio/SFX/cricket.mp3" id="21_cxxpw"]
 [ext_resource type="Script" path="res://Scripts/Tutorial.gd" id="22_yj4up"]
+[ext_resource type="Script" path="res://Scripts/game_over.gd" id="24_se2xp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umpqp"]
 atlas = ExtResource("1_qckxp")
@@ -276,8 +278,11 @@ _data = {
 }
 
 [node name="Gameplay" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_ypioa")
 
-[node name="Player" type="AnimatedSprite2D" parent="."]
+[node name="Player" type="AnimatedSprite2D" parent="." groups=["Pausable"]]
+process_mode = 1
 position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_h34ev")
 frame_progress = 0.098008
@@ -289,7 +294,8 @@ sprite_frames = SubResource("SpriteFrames_apli4")
 animation = &"Happy"
 script = ExtResource("4_ly0an")
 
-[node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music", "game_over_panel")]
+[node name="Bubble" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("timer", "music", "game_over_panel") groups=["Pausable"]]
+process_mode = 1
 position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_jcn8c")
 script = ExtResource("4_d0jyi")
@@ -340,9 +346,9 @@ z_index = 1
 position = Vector2(-44, -57)
 sprite_frames = SubResource("SpriteFrames_sx5t2")
 
-[node name="GUI" parent="." instance=ExtResource("5_r6kmo")]
+[node name="GUI" parent="." groups=["Pausable"] instance=ExtResource("5_r6kmo")]
 
-[node name="BackGround" type="Sprite2D" parent="."]
+[node name="BackGround" type="Sprite2D" parent="." groups=["Pausable"]]
 z_index = -1
 position = Vector2(240, 135)
 texture = ExtResource("6_7yq4q")
@@ -352,7 +358,8 @@ metadata/_edit_lock_ = true
 z_index = 1
 texture = ExtResource("10_tvaaw")
 
-[node name="Bubble Audience" type="AnimatedSprite2D" parent="."]
+[node name="Bubble Audience" type="AnimatedSprite2D" parent="." groups=["Pausable"]]
+process_mode = 1
 position = Vector2(240, 135)
 sprite_frames = SubResource("SpriteFrames_t04yn")
 metadata/_edit_lock_ = true
@@ -400,7 +407,8 @@ z_index = 1
 position = Vector2(-44, -57)
 sprite_frames = SubResource("SpriteFrames_sx5t2")
 
-[node name="Time Indicator" type="Path2D" parent="."]
+[node name="Time Indicator" type="Path2D" parent="." groups=["Pausable"]]
+process_mode = 1
 curve = SubResource("Curve2D_27a04")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Time Indicator"]
@@ -411,7 +419,8 @@ position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_po63m")
 frame = 1
 
-[node name="Audios" type="Node2D" parent="." node_paths=PackedStringArray("music", "timer")]
+[node name="Audios" type="Node2D" parent="." node_paths=PackedStringArray("music", "timer") groups=["Pausable"]]
+process_mode = 1
 script = ExtResource("15_eju4f")
 music = NodePath("Music")
 timer = NodePath("Timer")
@@ -442,12 +451,13 @@ bus = &"SFX"
 stream = ExtResource("21_cxxpw")
 bus = &"SFX"
 
-[node name="GameOver" type="Sprite2D" parent="."]
+[node name="GameOver" type="Sprite2D" parent="." groups=["Pausable"]]
 visible = false
 z_index = 1
 position = Vector2(240, 136)
 rotation = 6.28319
 texture = ExtResource("19_vryei")
+script = ExtResource("24_se2xp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
 libraries = {
@@ -457,7 +467,8 @@ libraries = {
 [node name="TransitionTimer" type="Timer" parent="GameOver"]
 wait_time = 2.0
 
-[node name="Tutorial" type="Node" parent="."]
+[node name="Tutorial" type="Node" parent="." groups=["Pausable"]]
+process_mode = 1
 script = ExtResource("22_yj4up")
 
 [node name="Timer" type="Timer" parent="Tutorial"]
@@ -471,6 +482,7 @@ script = ExtResource("22_yj4up")
 [connection signal="play_music" from="Bubble" to="Audios" method="_on_bubble_play_music"]
 [connection signal="score_increased" from="Bubble" to="GUI" method="_on_bubble_score_increased"]
 [connection signal="stop_music" from="Bubble" to="Audios" method="_on_bubble_stop_music"]
+[connection signal="player_lost" from="GUI" to="." method="_on_gui_player_lost"]
 [connection signal="player_lost" from="GUI" to="Bubble" method="_on_gui_player_lost"]
 [connection signal="timeout" from="Audios/Timer" to="Bubble" method="_on_timer_timeout"]
 [connection signal="timeout" from="GameOver/TransitionTimer" to="Bubble" method="_on_transition_timer_timeout"]

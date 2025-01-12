@@ -4,6 +4,7 @@ extends Node2D
 @export var high_score_label : Label
 
 func _ready():
+	get_tree().paused = false
 	final_score_label.text = str(PlayerScore.run_score)
 	high_score_label.text = str(PlayerScore.high_score)
 
