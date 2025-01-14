@@ -136,7 +136,7 @@ func _on_player_input_pressed(direction):
 
 func increment_index():
 	current_beat += 1
-	if current_beat % 2 != 0:
+	if current_beat % 2 == 0:
 		input_hit = false
 
 
