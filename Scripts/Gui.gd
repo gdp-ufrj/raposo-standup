@@ -31,7 +31,6 @@ func _check_diff_score(diff : float):
 	return 0
 
 func _on_bubble_life_lost():
-	print("aaaaaaaaaaaaaaaaaaaaaa")
 	misses += 1
 	misses_bar.value = misses
 	if misses >= max_misses:

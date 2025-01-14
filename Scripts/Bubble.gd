@@ -42,7 +42,6 @@ func _ready():
 	PlayerScore.reset_run_score()
 	select_emoji_sprites()
 	random.randomize()
-	generate_bubble()
 
 func select_emoji_sprites():
 	audience_emojis.append($"../Bubble Audience/Emojis/Emoji 0")
@@ -89,7 +88,7 @@ func generate_bubble(sequence : Array = []):
 
 
 func check_direction(direction):
-	var current_index : int = floor((current_beat + 1) / 2)
+	var current_index : int = get_beat_index(current_beat)
 	var current_queue = direction_queue[current_index]
 	
 	# if current is not null and above 3, 
@@ -109,8 +108,9 @@ func check_direction(direction):
 	input_hit = true
 
 func calculate_score(beat_time : float) -> float:
-	var current_index : int = floor((current_beat + 1) / 2)
-	return absf(beat_time - starting_time + current_tempo * current_index)
+	var current_index : int = get_beat_index(current_beat)
+	var score : = beat_time - (starting_time + current_tempo * current_index)
+	return absf(score)
 
 func generate_random_sequence():
 	direction_queue = []
@@ -146,7 +146,6 @@ func reset_time_indicator():
 
 
 func end_queue():
-	toggle_player_input.emit()
 	stop_music.emit()
 	if !bubble_active:
 		change_face.emit("Talking")
@@ -161,23 +160,27 @@ func end_queue():
 		else:
 			end_sequence_tutorial.emit()
 
-func _on_timer_timeout():
-	print("Finished beat " + str(current_beat))
+func _on_timer_timeout():	
+	if current_beat == total_emoji * 2 - 2:
+		toggle_player_input.emit()
+	
 	if current_beat == total_emoji * 2 - 1:
 		end_queue()
 		return
+		
 	
-	var current_index : int = floor((current_beat + 1) / 2)
+	var last_index : int = get_beat_index(current_beat - 1)
 	
 	# If going music and half beat and hasnt played
 	if bubble_active and current_beat % 2 != 0 and !input_hit:
 		# Check if there was a note
-		if direction_queue[current_index] != null:
+		if direction_queue[last_index] != null:
 			life_lost.emit()
 		else:
 			hit_success += 1
 		
 	increment_index()
+	var current_index : = get_beat_index(current_beat)
 	
 	if current_index < total_emoji and current_beat % 2 == 0:
 		if !bubble_active: #Imprime emojis na tela
@@ -235,3 +238,6 @@ func _on_tutorial_play_sequence(sequence):
 
 func _on_audios_current_music_tempo(current_tempo: float) -> void:
 	self.current_tempo = current_tempo
+	
+func get_beat_index(beat : int) -> int:
+	return floor((beat + 1) / 2)

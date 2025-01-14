@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://0qdt2th35cx5"]
+[gd_scene load_steps=54 format=3 uid="uid://0qdt2th35cx5"]
 
 [ext_resource type="Texture2D" uid="uid://btq13nevp1jpf" path="res://Assets/Visual/Player/corpo-Sheet.png" id="1_qckxp"]
 [ext_resource type="Script" path="res://Scripts/gameplay.gd" id="1_ypioa"]
@@ -24,7 +24,6 @@
 [ext_resource type="AudioStream" uid="uid://f0noe4ls6b8d" path="res://Assets/Audio/SFX/vaia.mp3" id="20_74lde"]
 [ext_resource type="AudioStream" uid="uid://drwiel3nurvgc" path="res://Assets/Audio/SFX/cricket.mp3" id="21_cxxpw"]
 [ext_resource type="Script" path="res://Scripts/Tutorial.gd" id="22_yj4up"]
-[ext_resource type="Script" path="res://Scripts/game_over.gd" id="24_se2xp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umpqp"]
 atlas = ExtResource("1_qckxp")
@@ -457,7 +456,6 @@ z_index = 1
 position = Vector2(240, 136)
 rotation = 6.28319
 texture = ExtResource("19_vryei")
-script = ExtResource("24_se2xp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
 libraries = {

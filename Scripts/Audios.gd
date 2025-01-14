@@ -19,7 +19,9 @@ func _on_bubble_play_music(has_timer : bool = false):
 	music.pitch_scale = beat_time_multiplier
 	music.play()
 	if has_timer:
-		timer.start(beat_time / beat_time_multiplier / 2.0)
+		var tempo : float = beat_time / beat_time_multiplier
+		current_music_tempo.emit(tempo * 1000)
+		timer.start(tempo / 2.0)
 
 
 func _on_bubble_stop_music():
