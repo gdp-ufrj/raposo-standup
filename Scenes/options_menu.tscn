@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bl4jwcyg8oair"]
+[gd_scene load_steps=4 format=3 uid="uid://bl4jwcyg8oair"]
 
-[ext_resource type="Texture2D" uid="uid://o48oq20hb6t4" path="res://Assets/Visual/Background/Main Menu/telaprincipal.png" id="1_kpde8"]
-[ext_resource type="Script" path="res://Scripts/OptionsMenu.gd" id="1_t8lyi"]
+[ext_resource type="Script" uid="uid://b7yuoxsg3kauc" path="res://Scripts/OptionsMenu.gd" id="1_t8lyi"]
 [ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="2_hlf0r"]
-[ext_resource type="PackedScene" path="res://Scenes/volume_change.tscn" id="4_11weh"]
+[ext_resource type="PackedScene" uid="uid://cllsuq7qaw3j1" path="res://Scenes/volume_change.tscn" id="4_11weh"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -14,47 +13,70 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t8lyi")
 
-[node name="BackGround" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_kpde8")
+[node name="BackGround" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.129412, 0.0705882, 0.121569, 1)
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 58.0
-offset_top = 65.0
-offset_right = 312.0
-offset_bottom = 255.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
 
-[node name="Resolution" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Resolution"]
+[node name="Resolution" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Resolution"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_hlf0r")
 theme_override_font_sizes/font_size = 14
 text = "Resolution"
 
-[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Resolution"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/Resolution"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_hlf0r")
 keep_pressed_outside = true
 alignment = 2
 
-[node name="Master Volume" parent="VBoxContainer" instance=ExtResource("4_11weh")]
+[node name="Language" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Language"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hlf0r")
+theme_override_font_sizes/font_size = 14
+text = "Language"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/Language"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_hlf0r")
+keep_pressed_outside = true
+
+[node name="Master Volume" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_11weh")]
 layout_mode = 2
 bus_name = "Master"
 
-[node name="Music Volume" parent="VBoxContainer" instance=ExtResource("4_11weh")]
+[node name="Music Volume" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_11weh")]
 layout_mode = 2
 bus_name = "Music"
 
-[node name="SFX Volume" parent="VBoxContainer" instance=ExtResource("4_11weh")]
+[node name="SFX Volume" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_11weh")]
 layout_mode = 2
-focus_neighbor_right = NodePath("../../Button")
-focus_neighbor_bottom = NodePath("../../Button")
+focus_neighbor_right = NodePath("../../../Button")
+focus_neighbor_bottom = NodePath("../../../Button")
 bus_name = "SFX"
 
 [node name="Button" type="Button" parent="."]

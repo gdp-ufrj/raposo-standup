@@ -1,3 +1,4 @@
+class_name VolumeSlider
 extends HBoxContainer
 
 @onready var audio_name_label = $Label as Label
