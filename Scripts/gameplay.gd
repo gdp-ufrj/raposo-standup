@@ -6,7 +6,7 @@ var is_over : = false
 var is_paused : = false
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("Pause"):
 		if is_over: return
 		pause()
 

@@ -459,7 +459,7 @@ texture = ExtResource("19_vryei")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
 libraries = {
-"": SubResource("AnimationLibrary_7krr6")
+&"": SubResource("AnimationLibrary_7krr6")
 }
 
 [node name="TransitionTimer" type="Timer" parent="GameOver"]
