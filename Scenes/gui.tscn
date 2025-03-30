@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cuv3fax2qw7x1"]
 
-[ext_resource type="Script" path="res://Scripts/Gui.gd" id="1_lbuu0"]
+[ext_resource type="Script" uid="uid://d1biqofy353h0" path="res://Scripts/Gui.gd" id="1_lbuu0"]
 [ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="2_av3g8"]
 [ext_resource type="Texture2D" uid="uid://dmocqb1cmgwto" path="res://Assets/Visual/HUD/emojis/roda-de-input1.png" id="2_ctaes"]
 [ext_resource type="Texture2D" uid="uid://dph7aukf55k82" path="res://Assets/Visual/HUD/vacilômetro/vacilometro-tomate.png" id="2_hmkxe"]

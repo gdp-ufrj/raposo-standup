@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cllsuq7qaw3j1"]
 
-[ext_resource type="Script" path="res://Scripts/AudioSettings.gd" id="1_ga6dv"]
+[ext_resource type="Script" uid="uid://biplj68ig8yba" path="res://Scripts/AudioSettings.gd" id="1_ga6dv"]
 [ext_resource type="FontFile" uid="uid://buwkc6nlcdvoa" path="res://Assets/Fonts/Pixeled.ttf" id="2_32u3r"]
 
 [node name="VolumeChange" type="HBoxContainer"]

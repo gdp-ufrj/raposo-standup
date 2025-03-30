@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dle7goxquqgcl"]
 
-[ext_resource type="Script" path="res://Scripts/TutorialScreen.gd" id="1_7r65t"]
+[ext_resource type="Script" uid="uid://bjly68kq5ky8i" path="res://Scripts/TutorialScreen.gd" id="1_7r65t"]
 [ext_resource type="Texture2D" uid="uid://b3lq6yw00f8ho" path="res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png" id="2_wyt7a"]
 
 [node name="Tutorial" type="Control"]

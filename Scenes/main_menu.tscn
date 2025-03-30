@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bg0i5lpgilsgc"]
 
-[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_0kcde"]
+[ext_resource type="Script" uid="uid://b2np2lgj7vvph" path="res://Scripts/MainMenu.gd" id="1_0kcde"]
 [ext_resource type="Texture2D" uid="uid://o48oq20hb6t4" path="res://Assets/Visual/Background/Main Menu/telaprincipal.png" id="2_3k2od"]
 [ext_resource type="Texture2D" uid="uid://n0x1n05d4ctg" path="res://Assets/Visual/HUD/Main Menu/start1.png" id="3_7kj2j"]
 [ext_resource type="Texture2D" uid="uid://c7s3bh04r2vdm" path="res://Assets/Visual/HUD/Main Menu/start2.png" id="4_glwpk"]
