@@ -90,8 +90,15 @@ Pause={
 [internationalization]
 
 locale/translation_remaps={
+"res://Assets/Visual/Background/Credits Screen/credits.png": PackedStringArray("res://Assets/Visual/Background/Credits Screen/credits.png:en", "res://Assets/Visual/Background/Credits Screen/credits_pt.png:pt"),
 "res://Assets/Visual/Background/Score Screen/score-screen.png": PackedStringArray("res://Assets/Visual/Background/Score Screen/score-screen.png:en", "res://Assets/Visual/Background/Score Screen/score_screen_pt.png:pt"),
-"res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png": PackedStringArray("res://Assets/Visual/Background/Tutorial Screen/RAPOSO3_pt.png:pt", "res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png:en")
+"res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png": PackedStringArray("res://Assets/Visual/Background/Tutorial Screen/RAPOSO3_pt.png:pt", "res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png:en"),
+"res://Assets/Visual/HUD/Main Menu/credits1.png": PackedStringArray("res://Assets/Visual/HUD/Main Menu/credits1.png:en", "res://Assets/Visual/HUD/Main Menu/credits1_pt.png:pt"),
+"res://Assets/Visual/HUD/Main Menu/credits2.png": PackedStringArray("res://Assets/Visual/HUD/Main Menu/credits2.png:en", "res://Assets/Visual/HUD/Main Menu/credits2_pt.png:pt"),
+"res://Assets/Visual/HUD/Main Menu/options1.png": PackedStringArray("res://Assets/Visual/HUD/Main Menu/options1.png:en", "res://Assets/Visual/HUD/Main Menu/options1_pt.png:pt"),
+"res://Assets/Visual/HUD/Main Menu/options2.png": PackedStringArray("res://Assets/Visual/HUD/Main Menu/options2.png:en", "res://Assets/Visual/HUD/Main Menu/options2_pt.png:pt"),
+"res://Assets/Visual/HUD/Main Menu/start1.png": PackedStringArray("res://Assets/Visual/HUD/Main Menu/start1.png:en", "res://Assets/Visual/HUD/Main Menu/start1_pt.png:pt"),
+"res://Assets/Visual/HUD/Main Menu/start2.png": PackedStringArray("res://Assets/Visual/HUD/Main Menu/start2.png:en", "res://Assets/Visual/HUD/Main Menu/start2_pt.png:pt")
 }
 locale/translations=PackedStringArray("res://Translation/translations.eng.translation", "res://Translation/translations.pt.translation")
 
