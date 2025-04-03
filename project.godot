@@ -89,6 +89,10 @@ Pause={
 
 [internationalization]
 
+locale/translation_remaps={
+"res://Assets/Visual/Background/Score Screen/score-screen.png": PackedStringArray("res://Assets/Visual/Background/Score Screen/score-screen.png:en", "res://Assets/Visual/Background/Score Screen/score_screen_pt.png:pt"),
+"res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png": PackedStringArray("res://Assets/Visual/Background/Tutorial Screen/RAPOSO3_pt.png:pt", "res://Assets/Visual/Background/Tutorial Screen/RAPOSO3.png:en")
+}
 locale/translations=PackedStringArray("res://Translation/translations.eng.translation", "res://Translation/translations.pt.translation")
 
 [rendering]
